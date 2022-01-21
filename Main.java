@@ -1,8 +1,11 @@
+import java.awt.*;
+import javax.swing.*;
 import java.util.*;
 import java.io.*;
 
 public class Main {
-	public static void main(String[] args) {
+
+	public void start() {
 		Scanner scan = new Scanner(System.in);
 		String programName;
 		final String EXT = ".java";
@@ -18,6 +21,13 @@ public class Main {
 			outputFile.print("\t}\n}");
 			outputFile.close();
 		} catch (IOException ex) {ex.printStackTrace();}
-		System.out.println("file created");
+	}
+
+
+	public static void main(String[] args) {
+		new Gui();
+		Main m = new Main();
+
+		m.start();
 	}
 }
