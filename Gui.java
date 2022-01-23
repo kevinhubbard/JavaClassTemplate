@@ -25,7 +25,6 @@ public class Gui {
 	public Gui() {
 		panel.setBackground(Color.GRAY);
 
-		
 		panel.add(classLbl);
 		panel.add(classNameTf);
 		panel.add(mainCb);
@@ -66,8 +65,8 @@ public class Gui {
 			if (implementCb.isSelected()) {
 				implementString = implementTf.getText();
 			}
-
-			System.out.println("class name was: " + className + "\nisMain() = " + mainClass + "\nimports: " + importString + "\nextends: " + extendString + "\nimplements: " + implementString);
+			ClassConstructor testClass = new ClassConstructor(className, mainClass);
+			//System.out.println("class name was: " + className + "\nisMain() = " + mainClass + "\nimports: " + importString + "\nextends: " + extendString + "\nimplements: " + implementString);
 		}
 	}
 
