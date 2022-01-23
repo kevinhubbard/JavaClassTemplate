@@ -5,13 +5,7 @@ import java.io.*;
 
 public class Main {
 
-	public void start() {
-		Scanner scan = new Scanner(System.in);
-		String programName;
-		final String EXT = ".java";
-
-		System.out.println("Whats the programs Class name:");
-		programName = scan.nextLine();
+	/*public void start() {
 
 		try {
 			PrintWriter outputFile = new PrintWriter(programName + EXT);
@@ -21,13 +15,10 @@ public class Main {
 			outputFile.print("\t}\n}");
 			outputFile.close();
 		} catch (IOException ex) {ex.printStackTrace();}
-	}
+	}*/
 
 
 	public static void main(String[] args) {
 		new Gui();
-		Main m = new Main();
-
-		m.start();
 	}
 }
