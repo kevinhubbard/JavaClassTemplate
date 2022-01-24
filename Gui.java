@@ -1,6 +1,7 @@
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.*;
 
 public class Gui {
 	JFrame frame = new JFrame("Create a Class");
@@ -18,13 +19,10 @@ public class Gui {
 
 	JLabel classLbl = new JLabel("Class Name:");
 	JButton create = new JButton("Create");
-	String importString;
-	String extendString;
-	String implementString;
+	String className, importString, extendString, implementString;
+	boolean mainClass;
 
 	public Gui() {
-		panel.setBackground(Color.GRAY);
-
 		panel.add(classLbl);
 		panel.add(classNameTf);
 		panel.add(mainCb);
@@ -45,16 +43,34 @@ public class Gui {
 		implementCb.addActionListener(new ImplementsListener());
 		create.addActionListener(new SubmitListener());
 
+		panel.setBackground(Color.GRAY);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(350, 200);
 		frame.getContentPane().add(BorderLayout.CENTER, panel);
 		frame.setVisible(true);
 	}
 
+	public void clearScreen() {
+		classNameTf.setText("");
+		importTf.setText("");
+		extendTf.setText("");
+		implementTf.setText("");
+		mainCb.setSelected(false);
+		importCb.setSelected(false);
+		extendCb.setSelected(false);
+		implementCb.setSelected(false);
+
+		className = null;
+		mainClass = false;
+		importString = null;
+		extendString = null;
+		implementString = null;
+	}
+
 	public class SubmitListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			String className = classNameTf.getText();
-			boolean mainClass = mainCb.isSelected();
+			className = classNameTf.getText();
+			mainClass = mainCb.isSelected();
 
 			if (importCb.isSelected()) {
 				importString = importTf.getText();
@@ -65,8 +81,9 @@ public class Gui {
 			if (implementCb.isSelected()) {
 				implementString = implementTf.getText();
 			}
-			ClassConstructor testClass = new ClassConstructor(className, mainClass);
-			//System.out.println("class name was: " + className + "\nisMain() = " + mainClass + "\nimports: " + importString + "\nextends: " + extendString + "\nimplements: " + implementString);
+
+			new ClassConstructor(className, mainClass, importString, extendString, implementString);
+			clearScreen();
 		}
 	}
 
