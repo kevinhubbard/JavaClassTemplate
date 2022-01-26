@@ -26,9 +26,9 @@ public class Gui {
 		addBtnPanel.importBtn.addActionListener(new AddImport());
 		addBtnPanel.extendBtn.addActionListener(new AddExtend());
 		addBtnPanel.implementBtn.addActionListener(new AddImplement());
-		checkBoxPanel.importCb.addActionListener(new ImportsListener());
-		checkBoxPanel.extendCb.addActionListener(new ExtendsListener());
-		checkBoxPanel.implementCb.addActionListener(new ImplementsListener());
+		checkBoxPanel.importCb.addActionListener(new ImportCbListener());
+		checkBoxPanel.extendCb.addActionListener(new ExtendCbListener());
+		checkBoxPanel.implementCb.addActionListener(new ImplementCbListener());
 		create.addActionListener(new SubmitListener());
 		panel.setBackground(Color.GRAY);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -71,8 +71,8 @@ public class Gui {
 		}
 		return testPass;
 	}
-
-	public class ImportsListener implements ActionListener {
+//CHECKBOX LISTENERS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	public class ImportCbListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (checkBoxPanel.importCb.isSelected()) {
 				textFieldPanel.importTf.setEnabled(true);
@@ -84,15 +84,7 @@ public class Gui {
 		}
 	}
 
-	public class AddImport implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			String parseImport = "import " + textFieldPanel.importTf.getText() + ";";
-			importList.add(parseImport);
-			textFieldPanel.importTf.setText("");
-		}
-	}
-
-	public class ExtendsListener implements ActionListener {
+	public class ExtendCbListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (checkBoxPanel.extendCb.isSelected()) {
 				textFieldPanel.extendTf.setEnabled(true);
@@ -101,6 +93,26 @@ public class Gui {
 				textFieldPanel.extendTf.setEnabled(false);
 				addBtnPanel.extendBtn.setEnabled(false);
 			}
+		}
+	}
+
+	public class ImplementCbListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			if (checkBoxPanel.implementCb.isSelected()) {
+				textFieldPanel.implementTf.setEnabled(true);
+				addBtnPanel.implementBtn.setEnabled(true);
+			} else {
+				textFieldPanel.implementTf.setEnabled(false);
+				addBtnPanel.implementBtn.setEnabled(false);
+			}
+		}
+	}
+//ADD BUTTON LISTENERS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	public class AddImport implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			String parseImport = "import " + textFieldPanel.importTf.getText() + ";";
+			importList.add(parseImport);
+			textFieldPanel.importTf.setText("");
 		}
 	}
 
@@ -123,28 +135,18 @@ public class Gui {
 		}
 	}
 
-	public class ImplementsListener implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			if (checkBoxPanel.implementCb.isSelected()) {
-				textFieldPanel.implementTf.setEnabled(true);
-				addBtnPanel.implementBtn.setEnabled(true);
-			} else {
-				textFieldPanel.implementTf.setEnabled(false);
-				addBtnPanel.implementBtn.setEnabled(false);
-			}
-		}
-	}
-
 	public class AddImplement implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			implementList.add(textFieldPanel.implementTf.getText());
 			textFieldPanel.implementTf.setText("");
 		}
 	}
-
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	
 	public class SubmitListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			className = classNamePanel.classNameTf.getText();
+			className = className.replaceAll("\\s", "");
+			className = className.substring(0,1).toUpperCase() + className.substring(1);
 			mainClass = checkBoxPanel.mainCb.isSelected();
 			if (classNameCheck(className)) {
 				new ClassConstructor(className, mainClass, importList, extendList, implementList);
