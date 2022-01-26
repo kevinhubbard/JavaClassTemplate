@@ -5,8 +5,8 @@ public class ClassConstructor {
 	String EXT = ".java";
 	String className;
 	//String importString;
-	String extendString = " extends ";
-	String implemString = " implements ";
+	String extendString = "";
+	String implemString = "";
 	boolean isMainClass;
 
 	ArrayList<String> importList = new ArrayList<String>();
@@ -21,35 +21,30 @@ public class ClassConstructor {
 	}
 
 	public void generateExtendString(ArrayList<String> extendList) {
-		for (String parent : extendList) {
-			extendString += parent;
+		if (extendList.size() == 0 ) {
+			System.out.println("this class does not extend anything.");
+		} else {
+			for (String parent : extendList) {
+				extendString += " extends " + parent;
+			}
 		}
 	}
 
 	public void generateImplementString(ArrayList<String> interfaceList) {
-		for (String interfaceString : interfaceList) {
-			implemString += interfaceString + ", ";
-		}
-	}
-
-	public String insertExtendString() {
-		String te = "";
-		if (extendString.length() > 9) {
-			te = extendString;
+		if (interfaceList.size() == 0 ) {
+			System.out.println("this class does not implement any interfaces.");
 		} else {
-			System.out.println("Class did not extend anything.");
+			implemString = " implements ";
+			int test = interfaceList.size();
+			for (String interfaceString : interfaceList) {
+				if (test > 1) {
+					implemString += interfaceString + ", ";
+					test--;
+				} else {
+					implemString += interfaceString;
+				}
+			}
 		}
-		return te;
-	}
-
-	public String insertImplementString() {
-		String is = "";
-		if (implemString.length() > 12) {
-			is = implemString;
-		} else {
-			System.out.println("Class did not implement anything.");
-		}
-		return is;
 	}
 
 	public void createFile() {
@@ -62,7 +57,7 @@ public class ClassConstructor {
 					}
 					outputFile.println();
 				}
-				outputFile.print("public class " + className + insertExtendString() + insertImplementString() + "{\n\t\n");
+				outputFile.print("public class " + className + extendString + implemString + " {\n\t\n");
 				outputFile.print("\tpublic static void main(String[] args) {\n\t\t\n\t}\n}");
 				outputFile.close();
 			} catch (IOException ex) {ex.printStackTrace();}
@@ -76,7 +71,7 @@ public class ClassConstructor {
 					}
 					outputFile.println();
 				}	
-				outputFile.print("public class " + className + insertExtendString() + insertImplementString() + "{\n\t\n}");
+				outputFile.print("public class " + className + extendString + implemString + " {\n\t\n}");
 				outputFile.close();
 			} catch (IOException ex) {ex.printStackTrace();}
 			System.out.println("not a main class");
