@@ -2,9 +2,10 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.*;
+import java.io.*;
 
 public class Gui {
-	String className, importString, implementString;
+	String className;
 	boolean mainClass;
 	JFrame frame = new JFrame("Create a Class");
 	JPanel panel = new JPanel();
@@ -32,7 +33,7 @@ public class Gui {
 		create.addActionListener(new SubmitListener());
 		panel.setBackground(Color.GRAY);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(330, 550);
+		frame.setSize(330, 225);
 		frame.setResizable(false);
 		frame.getContentPane().add(BorderLayout.CENTER, panel);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -50,8 +51,6 @@ public class Gui {
 		checkBoxPanel.extendCb.setSelected(false);
 		checkBoxPanel.implementCb.setSelected(false);
 		className = null;
-		importString = null;
-		implementString = null;
 		mainClass = false;
 		importList.clear();
 		extendList.clear();
@@ -62,11 +61,14 @@ public class Gui {
 		addBtnPanel.implementBtn.setEnabled(false);
 	}
 
-	public boolean classNameCheck(String cName) {
+	public boolean classNameCheck() {
 		boolean testPass = false;
-		if (cName.length() == 0) {
+		className = classNamePanel.classNameTf.getText();
+		className = className.replaceAll("\\s", "");
+		if (className.length() == 0) {
 			JOptionPane.showMessageDialog(frame, "Invalid Class Name.");
 		} else {
+			className = className.substring(0,1).toUpperCase() + className.substring(1);
 			testPass = true;
 		}
 		return testPass;
@@ -110,8 +112,7 @@ public class Gui {
 //ADD BUTTON LISTENERS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	public class AddImport implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			String parseImport = "import " + textFieldPanel.importTf.getText() + ";";
-			importList.add(parseImport);
+			importList.add(textFieldPanel.importTf.getText());
 			textFieldPanel.importTf.setText("");
 		}
 	}
@@ -144,12 +145,14 @@ public class Gui {
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	
 	public class SubmitListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			className = classNamePanel.classNameTf.getText();
-			className = className.replaceAll("\\s", "");
-			className = className.substring(0,1).toUpperCase() + className.substring(1);
-			mainClass = checkBoxPanel.mainCb.isSelected();
-			if (classNameCheck(className)) {
-				new ClassConstructor(className, mainClass, importList, extendList, implementList);
+			JFileChooser fc = new JFileChooser();
+			fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+			fc.showSaveDialog(frame);
+			File outDir = new File(fc.getName(fc.getSelectedFile()));
+			
+			if (classNameCheck()) {
+				mainClass = checkBoxPanel.mainCb.isSelected();
+				new ClassConstructor(className, mainClass, importList, extendList, implementList, outDir);
 			} else {
 				System.out.println("error somewhere.");
 			}
