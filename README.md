@@ -4,13 +4,15 @@ Currently WIP:
 - [] Save class file to a specific folder.
 - [] Change logic for extends
 - [] Add package input
-- [] Ask if you would like to build a project dir.
+- [] Ask if you wou like to build a project dir.
 
 To run:
 ```
 git clone
-cd /source
-javac -d ../source net/kevinjr/*.java
+cd JavaClassTemplate/source
+javac -d ../classes net/kevinjr/*.java
 cd ../classes
 jar -cvmf manifest.txt classConstruct.jar net
 ```
+
+If there are no errors, a JAR file will be created. 
