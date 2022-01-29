@@ -7,7 +7,7 @@ import java.util.*;
 import java.io.*;
 
 public class Gui {
-	String className;
+	String className, extendString;
 	boolean mainClass;
 	JFrame frame = new JFrame("Create a Class");
 	JPanel panel = new JPanel();
@@ -121,18 +121,8 @@ public class Gui {
 
 	public class AddExtend implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if (extendList.size() != 0) {
-				String update = JOptionPane.showInputDialog(frame, "You can only extend one class.\nOverride previous parent or cancel");
-				if (update == null) {
-					System.out.println("nothing was input.  is still extended.");
-					textFieldPanel.extendTf.setText(extendList.get(0));
-				} else {
-					extendList.clear();
-					extendList.add(update);
-				}
-			} else {
-				extendList.add(textFieldPanel.extendTf.getText());
-			}
+			extendString = textFieldPanel.extendTf.getText();
+			System.out.println("extendString is " + extendString);
 			textFieldPanel.extendTf.setEnabled(false);
 			addBtnPanel.extendBtn.setEnabled(false);
 		}
@@ -154,7 +144,7 @@ public class Gui {
 			
 			if (classNameCheck()) {
 				mainClass = checkBoxPanel.mainCb.isSelected();
-				new ClassConstructor(className, mainClass, importList, extendList, implementList, outDir);
+				new ClassConstructor(className, mainClass, importList, extendString, implementList, outDir);
 			} else {
 				System.out.println("error somewhere.");
 			}
