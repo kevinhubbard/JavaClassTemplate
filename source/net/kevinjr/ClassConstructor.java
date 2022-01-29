@@ -12,7 +12,7 @@ public class ClassConstructor {
 	boolean isMainClass;
 	File file;
 
-	public ClassConstructor(String n, boolean m, ArrayList<String> i, ArrayList<String> e, ArrayList<String> t, File f) {
+	public ClassConstructor(String n, boolean m, ArrayList<String> i, String e, ArrayList<String> t, File f) {
 		className = n;
 		isMainClass = m;
 		generateImportString(i);
@@ -34,14 +34,12 @@ public class ClassConstructor {
 		}
 	} 
 
-	public void generateExtendString(ArrayList<String> extendList) {
+	public void generateExtendString(String extendInput) {
 		extendString = "";
-		if (extendList.size() == 0 ) {
+		if (extendInput.length() == 0 ) {
 			System.out.println("this class does not extend anything.");
 		} else {
-			for (String parent : extendList) {
-				extendString += " extends " + parent;
-			}
+				extendString += " extends " + extendInput;
 		}
 	}
 
