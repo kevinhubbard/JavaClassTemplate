@@ -5,7 +5,7 @@ Currently WIP:
 - [] Change logic for extends
 - [] Add package input
 - [] Ask if you wou like to build a project dir.
-- [] Add input validity
+- [x] Add input validity
 
 To run:
 ```
@@ -13,7 +13,11 @@ git clone
 cd JavaClassTemplate/source
 javac -d ../classes net/kevinjr/*.java
 cd ../classes
-jar -cvmf manifest.txt classConstruct.jar net
+java net/kevinjr/Main
 ```
+To create a JAR file:
+Compile the same way as above.
+Go to classes directory in the terminal and enter the following command.
+`jar -cvmf manifest.txt classConstruct.jar net` 
 
-If there are no errors, a JAR file will be created. 
+If no errors a JAR file will be created in the classes directory.
