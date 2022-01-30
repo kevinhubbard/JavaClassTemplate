@@ -16,6 +16,7 @@ cd ../classes
 java net/kevinjr/Main
 ```
 To create a JAR file:
+
 Compile the same way as above.
 Go to classes directory in the terminal and enter the following command.
 `jar -cvmf manifest.txt classConstruct.jar net` 
