@@ -5,6 +5,7 @@ Currently WIP:
 - [] Change logic for extends
 - [] Add package input
 - [] Ask if you wou like to build a project dir.
+- [] Add input validity
 
 To run:
 ```
