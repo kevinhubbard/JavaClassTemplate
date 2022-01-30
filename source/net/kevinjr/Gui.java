@@ -16,8 +16,8 @@ public class Gui {
 	TfPanel textFieldPanel = new TfPanel();
 	BtnPanel addBtnPanel = new BtnPanel();
 	ArrayList<String> importList = new ArrayList<String>();
-	ArrayList<String> extendList = new ArrayList<String>();
 	ArrayList<String> implementList = new ArrayList<String>();
+	ClassConstructor cc = new ClassConstructor();
 
 	public Gui() {
 		panel.add(classNamePanel);
@@ -55,14 +55,14 @@ public class Gui {
 		className = null;
 		mainClass = false;
 		importList.clear();
-		extendList.clear();
+		extendString = null;
 		implementList.clear();
 		textFieldPanel.importTf.setEnabled(false);
 		addBtnPanel.importBtn.setEnabled(false);
 		textFieldPanel.implementTf.setEnabled(false);
 		addBtnPanel.implementBtn.setEnabled(false);
 	}
-
+/*
 	public boolean classNameCheck() {
 		boolean testPass = false;
 		className = classNamePanel.classNameTf.getText();
@@ -74,7 +74,7 @@ public class Gui {
 			testPass = true;
 		}
 		return testPass;
-	}
+	}*/
 //CHECKBOX LISTENERS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	public class ImportCbListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
@@ -116,6 +116,8 @@ public class Gui {
 		public void actionPerformed(ActionEvent e) {
 			importList.add(textFieldPanel.importTf.getText());
 			textFieldPanel.importTf.setText("");
+			//~~~VALIDATE INPUT~~~~//
+			
 		}
 	}
 
@@ -123,8 +125,17 @@ public class Gui {
 		public void actionPerformed(ActionEvent e) {
 			extendString = textFieldPanel.extendTf.getText();
 			System.out.println("extendString is " + extendString);
+			
+
+			if (cc.validExtend(extendString) == false ) {
+				JOptionPane.showMessageDialog(frame, "Invalid Extend Name.");
+			}
+
+
+
 			textFieldPanel.extendTf.setEnabled(false);
 			addBtnPanel.extendBtn.setEnabled(false);
+			//~~~VALIDATE INPUT~~~~//
 		}
 	}
 
@@ -132,23 +143,20 @@ public class Gui {
 		public void actionPerformed(ActionEvent e) {
 			implementList.add(textFieldPanel.implementTf.getText());
 			textFieldPanel.implementTf.setText("");
+			//~~~VALIDATE INPUT~~~~//
 		}
 	}
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	
 	public class SubmitListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			JFileChooser fc = new JFileChooser();
-			fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-			fc.showSaveDialog(frame);
-			File outDir = new File(fc.getName(fc.getSelectedFile()));
-			
-			if (classNameCheck()) {
-				mainClass = checkBoxPanel.mainCb.isSelected();
-				new ClassConstructor(className, mainClass, importList, extendString, implementList, outDir);
+			className = classNamePanel.classNameTf.getText();
+			if (cc.validClassName(className)) {
+				cc.generateMainClass(checkBoxPanel.mainCb.isSelected());
+				System.out.println(cc.returnS());
+				clearScreen();
 			} else {
-				System.out.println("error somewhere.");
+				JOptionPane.showMessageDialog(frame, "Invalid Class Name.");
 			}
-			clearScreen();
 		}
 	}
 }
