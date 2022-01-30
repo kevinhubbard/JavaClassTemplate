@@ -6,48 +6,72 @@ import java.util.*;
 public class ClassConstructor {
 	final String EXT = ".java";
 	String className, importString, extendString, implemString;
-	boolean isMainClass;
+	boolean mainBool;
+
+	ArrayList<String> importList = new ArrayList<String>();
+	ArrayList<String> implementList = new ArrayList<String>();
 
 
-
+//~~~~~~~~~~~~~~~~~~~VALIDATION METHODS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	public boolean validClassName(String classTestStr) {
-		boolean boolTest = false;
-		classTestStr.replaceAll("\\s", "");
+		boolean classTest = false;
+		classTestStr = classTestStr.replaceAll("\\s", "");
 		if (classTestStr.length() != 0) {
-			boolTest = true;
+			classTest = true;
+			className = classTestStr;
 		}
-		return boolTest;
+		return classTest;
+	}
+
+	public boolean validImport(String importStr) {
+		boolean importTest = false;
+		importStr = importStr.replaceAll("\\s", "");
+		if (importStr == null || importStr.length() == 0) {
+			System.out.println("not valid import String");
+		} else {
+			importList.add(importStr);
+			importTest = true;
+		}
+		return importTest;
 	}
 
 	public boolean validExtend(String extStr) {
-		boolean boolTest = false;
-		if (extStr == null) {
-			System.out.println("does not extend class");
+		boolean extendTest = false;
+		extStr = extStr.replaceAll("\\s", "");
+		if (extStr == null || extStr.length() == 0) {
+			System.out.println("not valid extend String");
 		} else {
-			generateExtendString(extStr);
+			extendString = extStr;
+			extendTest = true;
 		}
-		return boolTest;
+		return extendTest;
 	}
 
+	public boolean validImplement(String impleStr) {
+		boolean impleTest = false;
+		impleStr = impleStr.replaceAll("\\s", "");
+		if (impleStr == null || impleStr.length() == 0) {
+			System.out.println("not valid implement String");
+		} else {
+			implementList.add(impleStr);
+			impleTest = true;
+		}
+		return impleTest;
+	}
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-	public void generateMainClass(boolean tb) {
+
+
+	public void isMainClass(boolean tb) {
 		if (tb == true) {
-			isMainClass = true;
+			mainBool = true;
 		} else {
-			isMainClass = false;
+			mainBool = false;
 		}
 	}
 
 
-	public String returnS() {
-		String t = "";
-		if (isMainClass) {
-			t = "is main class";
-		} else {
-			t = "not main class.";
-		}
-		return t;
-	}
+
 
 
 
@@ -90,8 +114,38 @@ public class ClassConstructor {
 		}
 	}
 
+	public void showInfo() {
+		System.out.println("Class name is: " + className);
+		if (mainBool) {
+			System.out.println("is main Class.");
+		} else {
+			System.out.println("is not main class.");
+		}
+		if (importList.size() > 0) {
+			System.out.println("Class imports: ");
+			for (String i : importList) {
+				System.out.print(i + " ");
+			}
+		} else {
+			System.out.println("Does not Import anything.");
+		}
+		if (extendString == null || extendString.length() == 0) {
+			System.out.println("Does not Extend anything.");
+		} else {
+			System.out.println("Class extends: " + extendString);
+		}
+		if (implementList.size() > 0) {
+			System.out.println("Class imports: ");
+			for (String l : implementList) {
+				System.out.print(l + " ");
+			}
+		} else {
+			System.out.println("Does not Implement anything.");
+		}
+	}
+
 	public void createFile() {
-		if (isMainClass) {
+		if (mainBool) {
 			try {
 				
 				PrintWriter outputFile = new PrintWriter(className + EXT);
