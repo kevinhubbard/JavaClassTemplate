@@ -15,8 +15,6 @@ public class Gui {
 	CbPanel checkBoxPanel = new CbPanel();
 	TfPanel textFieldPanel = new TfPanel();
 	BtnPanel addBtnPanel = new BtnPanel();
-	ArrayList<String> importList = new ArrayList<String>();
-	ArrayList<String> implementList = new ArrayList<String>();
 	ClassConstructor cc = new ClassConstructor();
 
 	public Gui() {
@@ -54,27 +52,13 @@ public class Gui {
 		checkBoxPanel.implementCb.setSelected(false);
 		className = null;
 		mainClass = false;
-		importList.clear();
 		extendString = null;
-		implementList.clear();
 		textFieldPanel.importTf.setEnabled(false);
 		addBtnPanel.importBtn.setEnabled(false);
 		textFieldPanel.implementTf.setEnabled(false);
 		addBtnPanel.implementBtn.setEnabled(false);
 	}
-/*
-	public boolean classNameCheck() {
-		boolean testPass = false;
-		className = classNamePanel.classNameTf.getText();
-		className = className.replaceAll("\\s", "");
-		if (className.length() == 0) {
-			JOptionPane.showMessageDialog(frame, "Invalid Class Name.");
-		} else {
-			className = className.substring(0,1).toUpperCase() + className.substring(1);
-			testPass = true;
-		}
-		return testPass;
-	}*/
+
 //CHECKBOX LISTENERS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	public class ImportCbListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
@@ -114,49 +98,61 @@ public class Gui {
 //ADD BUTTON LISTENERS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	public class AddImport implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			importList.add(textFieldPanel.importTf.getText());
-			textFieldPanel.importTf.setText("");
+			String testImport = textFieldPanel.importTf.getText();
 			//~~~VALIDATE INPUT~~~~//
-			
+			if (cc.validImport(testImport) == false) {
+				JOptionPane.showMessageDialog(frame, "Invalid Import name.");
+				textFieldPanel.importTf.setText("");
+			} else {
+				System.out.println(testImport + " was valid.");
+				textFieldPanel.importTf.setText("");
+			}
 		}
 	}
 
 	public class AddExtend implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			extendString = textFieldPanel.extendTf.getText();
-			System.out.println("extendString is " + extendString);
-			
-
-			if (cc.validExtend(extendString) == false ) {
-				JOptionPane.showMessageDialog(frame, "Invalid Extend Name.");
+			String testExtend = textFieldPanel.extendTf.getText();
+			//~~~VALIDATE INPUT~~~~//
+			if (cc.validExtend(testExtend) == false ) {
+				JOptionPane.showMessageDialog(frame, "Invalid Extend name.");
+				textFieldPanel.extendTf.setText(extendString);
+				checkBoxPanel.extendCb.setSelected(false);
+			} else {
+				System.out.println(testExtend + " was valid.");
+				extendString = textFieldPanel.extendTf.getText();
 			}
-
-
-
 			textFieldPanel.extendTf.setEnabled(false);
 			addBtnPanel.extendBtn.setEnabled(false);
-			//~~~VALIDATE INPUT~~~~//
 		}
 	}
 
 	public class AddImplement implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			implementList.add(textFieldPanel.implementTf.getText());
-			textFieldPanel.implementTf.setText("");
+			String testImplement = textFieldPanel.implementTf.getText();
 			//~~~VALIDATE INPUT~~~~//
+			if (cc.validImplement(testImplement) == false) {
+				JOptionPane.showMessageDialog(frame, "Invalid Implement name.");
+			} else {
+				System.out.println(testImplement + " was valid.");
+				textFieldPanel.implementTf.setText("");
+			}
 		}
 	}
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	
 	public class SubmitListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			className = classNamePanel.classNameTf.getText();
-			if (cc.validClassName(className)) {
-				cc.generateMainClass(checkBoxPanel.mainCb.isSelected());
-				System.out.println(cc.returnS());
-				clearScreen();
-			} else {
+			String testClass = classNamePanel.classNameTf.getText();
+			if (cc.validClassName(testClass) == false) {
 				JOptionPane.showMessageDialog(frame, "Invalid Class Name.");
+			} else {
+				cc.isMainClass(checkBoxPanel.mainCb.isSelected());
+				cc.showInfo();
+				clearScreen();
 			}
 		}
 	}
 }
+
+
+
