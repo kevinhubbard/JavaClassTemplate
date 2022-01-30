@@ -4,22 +4,56 @@ import java.io.*;
 import java.util.*;
 
 public class ClassConstructor {
-	String EXT = ".java";
-	String className;
-	String importString;
-	String extendString;
-	String implemString;
+	final String EXT = ".java";
+	String className, importString, extendString, implemString;
 	boolean isMainClass;
-	File file;
 
-	public ClassConstructor(String n, boolean m, ArrayList<String> i, String e, ArrayList<String> t, File f) {
-		className = n;
-		isMainClass = m;
-		generateImportString(i);
-		generateExtendString(e);
-		generateImplementString(t);
-		file = f;
-		createFile();
+
+
+	public boolean validClassName(String classTestStr) {
+		boolean boolTest = false;
+		classTestStr.replaceAll("\\s", "");
+		if (classTestStr.length() != 0) {
+			boolTest = true;
+		}
+		return boolTest;
+	}
+
+	public boolean validExtend(String extStr) {
+		boolean boolTest = false;
+		if (extStr == null) {
+			System.out.println("does not extend class");
+		} else {
+			generateExtendString(extStr);
+		}
+		return boolTest;
+	}
+
+
+	public void generateMainClass(boolean tb) {
+		if (tb == true) {
+			isMainClass = true;
+		} else {
+			isMainClass = false;
+		}
+	}
+
+
+	public String returnS() {
+		String t = "";
+		if (isMainClass) {
+			t = "is main class";
+		} else {
+			t = "not main class.";
+		}
+		return t;
+	}
+
+
+
+
+	public void generateClassString(String classStr) {
+		className = classStr.substring(0,1).toUpperCase() + classStr.substring(1);
 	}
 
 	public void generateImportString(ArrayList<String> imp) {
@@ -35,12 +69,7 @@ public class ClassConstructor {
 	} 
 
 	public void generateExtendString(String extendInput) {
-		extendString = "";
-		if (extendInput.length() == 0 ) {
-			System.out.println("this class does not extend anything.");
-		} else {
-				extendString += " extends " + extendInput;
-		}
+		extendString += " extends " + extendInput;
 	}
 
 	public void generateImplementString(ArrayList<String> interfaceList) {
