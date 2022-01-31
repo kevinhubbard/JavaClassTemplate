@@ -7,18 +7,21 @@ Currently WIP:
 - [] Ask if you wou like to build a project dir.
 - [x] Add input validity
 
-To run:
-***Must have JVM installed***
+Compile: ***Must have JVM installed***
 ```
 git clone
 cd JavaClassTemplate/source
 javac -d ../classes net/kevinjr/*.java
-cd ../classes
-java net/kevinjr/Main
 ```
-To create a JAR file:  
+
+Run:  
+```
+cd ../classes; java net/kevinjr/Main
+```
+
+Create JAR:  
 Compile the same way as above.  
-Go to classes directory in the terminal and enter the following command.
+Go to classes directory.
 ```
 jar -cvmf manifest.txt classConstruct.jar net
 ``` 
