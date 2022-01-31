@@ -5,15 +5,14 @@ import java.util.*;
 
 public class ClassConstructor {
 	final String EXT = ".java";
-	String className, importString, extendString, implemString;
+	String className, importString, extendString, implemString, saveLocation;
 	boolean mainBool;
-
 	ArrayList<String> importList = new ArrayList<String>();
 	ArrayList<String> implementList = new ArrayList<String>();
 
-
 //~~~~~~~~~~~~~~~~~~~VALIDATION METHODS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	public boolean validClassName(String classTestStr) {
+
+	public boolean validName(String classTestStr) {
 		boolean classTest = false;
 		classTestStr = classTestStr.replaceAll("\\s", "");
 		if (classTestStr.length() != 0) {
@@ -58,9 +57,7 @@ public class ClassConstructor {
 		}
 		return impleTest;
 	}
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
+//~~~~~~~~~~~~~~~~~~~~~~~SET METHODS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 	public void isMainClass(boolean tb) {
 		if (tb == true) {
@@ -70,20 +67,14 @@ public class ClassConstructor {
 		}
 	}
 
-
-
-
-
-
-
 	public void setClassString(String classStr) {
 		className = classStr.substring(0,1).toUpperCase() + classStr.substring(1);
 	}
 
 	public void setImportString(ArrayList<String> importInput) {
-		importString = "";
 		if (importInput.size() == 0 ) {
-			System.out.println("this class doesnt import anything.");
+			System.out.println("This class does not import anything.");
+			importString = "";
 		} else {
 			for (String obj : importInput) {
 				importString += "import " + obj + ";\n";
@@ -94,6 +85,7 @@ public class ClassConstructor {
 
 	public void setExtendString(String extendInput) {
 		if (extendInput == null || extendInput.length() == 0) {
+			System.out.println("This class does not extend anything.");
 			extendString = "";
 		} else {
 			extendString = " extends " + extendInput;
@@ -101,9 +93,9 @@ public class ClassConstructor {
 	}
 
 	public void setImplementString(ArrayList<String> implementInput) {
-		implemString = "";
 		if (implementInput.size() == 0 ) {
-			System.out.println("this class does not implement any interfaces.");
+			System.out.println("This class does not implement anything.");
+			implemString = "";
 		} else {
 			implemString = " implements ";
 			int test = implementInput.size();
@@ -118,38 +110,12 @@ public class ClassConstructor {
 		}
 	}
 
-
-	public void showInfo() {
-		System.out.println("Class name is: " + className);
-		if (mainBool) {
-			System.out.println("is main Class.");
-		} else {
-			System.out.println("is not main class.");
-		}
-		if (importList.size() > 0) {
-			System.out.println("Class imports: ");
-			for (String i : importList) {
-				System.out.println("\t" + i + " ");
-			}
-		} else {
-			System.out.println("Does not Import anything.");
-		}
-		if (extendString == null || extendString.length() == 0) {
-			System.out.println("Does not Extend anything.");
-		} else {
-			System.out.println("Class extends: " + extendString);
-		}
-		if (implementList.size() > 0) {
-			System.out.println("Class implements: ");
-			for (String l : implementList) {
-				System.out.println("\t" + l + " ");
-			}
-		} else {
-			System.out.println("Does not Implement anything.");
-		}
+	public void setSaveLocation(String l) {
+		saveLocation = l + "/";
 	}
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-	public void resetFields() {
+	private void resetFields() {
 		className = "";
 		importString = "";
 		extendString = "";
@@ -160,16 +126,16 @@ public class ClassConstructor {
 	}
 
 	public void createFile() {
-
 		setClassString(className);
 		setImportString(importList);
 		setExtendString(extendString);
 		setImplementString(implementList);
 
+
 		if (mainBool) {
 			try {
 				
-				PrintWriter outputFile = new PrintWriter(className + EXT);
+				PrintWriter outputFile = new PrintWriter(saveLocation + className + EXT);
 				outputFile.print(importString);
 				outputFile.print("public class " + className + extendString + implemString + " {\n\t\n");
 				outputFile.print("\tpublic static void main(String[] args) {\n\t\t\n\t}\n}");
@@ -179,13 +145,16 @@ public class ClassConstructor {
 		} else {
 			try {
 				
-				PrintWriter outputFile = new PrintWriter(className + EXT);
+				PrintWriter outputFile = new PrintWriter(saveLocation + className + EXT);
 				outputFile.print(importString);	
 				outputFile.print("public class " + className + extendString + implemString + " {\n\t\n}");
 				outputFile.close();
 			} catch (IOException ex) {ex.printStackTrace();}
 			System.out.println("not a main class");
 		}
+
+
+
 		resetFields();
 	}
 }
