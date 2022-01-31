@@ -147,20 +147,30 @@ public class Gui {
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	
 	public class SubmitListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			String testClass = classNamePanel.classNameTf.getText();
-			if (cc.validClassName(testClass) == false) {
+			String testName = classNamePanel.classNameTf.getText();
+			if (cc.validName(testName) == false) {
 				JOptionPane.showMessageDialog(frame, "Invalid Class Name.");
 				classNamePanel.classNameTf.setText("");
 				classNamePanel.classNameTf.requestFocus();
 			} else {
-				cc.isMainClass(checkBoxPanel.mainCb.isSelected());
-				//cc.showInfo();
-				cc.createFile();
-				clearScreen();
+				JFileChooser f = new JFileChooser();
+				f.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+				f.setCurrentDirectory(new File(System.getProperty("user.home")));
+				int returnVal = f.showSaveDialog(frame);
+				if (returnVal == JFileChooser.APPROVE_OPTION) {
+					System.out.println("Save approved.");
+					File saveLoc = f.getSelectedFile();
+					String locationString = saveLoc.getAbsolutePath();
+					cc.setSaveLocation(locationString);
+					cc.isMainClass(checkBoxPanel.mainCb.isSelected());
+					cc.createFile();
+					JOptionPane.showMessageDialog(frame, "File successfully created.");
+					clearScreen();
+					//ASK USER IF THEY WANT TO CREATE ANOTHER CLASS OR EXIT
+				} else {
+					System.out.println("Save selection canceled.");
+				}	
 			}
 		}
 	}
 }
-
-
-
