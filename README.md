@@ -12,7 +12,7 @@ Compile: ***Must have JVM installed***
 ```
 git clone https://github.com/kevinhubbard/JavaClassTemplate.git;
 cd JavaClassTemplate/source;
-javac -d ../classes net/kevinjr/*.java
+javac -d ../classes net/kevinjr/*.java;
 ```
 
 Run:  
