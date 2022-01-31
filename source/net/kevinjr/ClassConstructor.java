@@ -76,43 +76,48 @@ public class ClassConstructor {
 
 
 
-	public void generateClassString(String classStr) {
+	public void setClassString(String classStr) {
 		className = classStr.substring(0,1).toUpperCase() + classStr.substring(1);
 	}
 
-	public void generateImportString(ArrayList<String> imp) {
+	public void setImportString(ArrayList<String> importInput) {
 		importString = "";
-		if (imp.size() == 0 ) {
+		if (importInput.size() == 0 ) {
 			System.out.println("this class doesnt import anything.");
 		} else {
-			for (String obj : imp) {
+			for (String obj : importInput) {
 				importString += "import " + obj + ";\n";
 			}
 			importString += "\n";
 		}
 	} 
 
-	public void generateExtendString(String extendInput) {
-		extendString += " extends " + extendInput;
+	public void setExtendString(String extendInput) {
+		if (extendInput == null || extendInput.length() == 0) {
+			extendString = "";
+		} else {
+			extendString = " extends " + extendInput;
+		}
 	}
 
-	public void generateImplementString(ArrayList<String> interfaceList) {
+	public void setImplementString(ArrayList<String> implementInput) {
 		implemString = "";
-		if (interfaceList.size() == 0 ) {
+		if (implementInput.size() == 0 ) {
 			System.out.println("this class does not implement any interfaces.");
 		} else {
 			implemString = " implements ";
-			int test = interfaceList.size();
-			for (String interfaceString : interfaceList) {
+			int test = implementInput.size();
+			for (String i : implementInput) {
 				if (test > 1) {
-					implemString += interfaceString + ", ";
+					implemString += i + ", ";
 					test--;
 				} else {
-					implemString += interfaceString;
+					implemString += i;
 				}
 			}
 		}
 	}
+
 
 	public void showInfo() {
 		System.out.println("Class name is: " + className);
@@ -124,7 +129,7 @@ public class ClassConstructor {
 		if (importList.size() > 0) {
 			System.out.println("Class imports: ");
 			for (String i : importList) {
-				System.out.print(i + " ");
+				System.out.println("\t" + i + " ");
 			}
 		} else {
 			System.out.println("Does not Import anything.");
@@ -135,16 +140,32 @@ public class ClassConstructor {
 			System.out.println("Class extends: " + extendString);
 		}
 		if (implementList.size() > 0) {
-			System.out.println("Class imports: ");
+			System.out.println("Class implements: ");
 			for (String l : implementList) {
-				System.out.print(l + " ");
+				System.out.println("\t" + l + " ");
 			}
 		} else {
 			System.out.println("Does not Implement anything.");
 		}
 	}
 
+	public void resetFields() {
+		className = "";
+		importString = "";
+		extendString = "";
+		implemString = "";
+		importList.clear();
+		implementList.clear();
+		mainBool = false;
+	}
+
 	public void createFile() {
+
+		setClassString(className);
+		setImportString(importList);
+		setExtendString(extendString);
+		setImplementString(implementList);
+
 		if (mainBool) {
 			try {
 				
@@ -165,5 +186,6 @@ public class ClassConstructor {
 			} catch (IOException ex) {ex.printStackTrace();}
 			System.out.println("not a main class");
 		}
+		resetFields();
 	}
 }
