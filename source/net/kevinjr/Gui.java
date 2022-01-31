@@ -167,6 +167,10 @@ public class Gui {
 					JOptionPane.showMessageDialog(frame, "File successfully created.");
 					clearScreen();
 					//ASK USER IF THEY WANT TO CREATE ANOTHER CLASS OR EXIT
+					int option = JOptionPane.showConfirmDialog(frame, "Add another file?", "WARNING", JOptionPane.YES_NO_OPTION);
+					if (option != 0) {
+						System.exit(0);
+					}
 				} else {
 					System.out.println("Save selection canceled.");
 				}	
