@@ -1,16 +1,17 @@
-Program that creates a java class file.
+Program that creates a java class file.  
 
-Currently WIP:
-- [] Save class file to a specific folder.
+Current WIP for version 2:  
+- [x] Save class file to a specific folder.
 - [x] Change logic for extends
 - [] Add package input
 - [] Ask if you wou like to build a project dir.
 - [x] Add input validity
+- [] Show editable 
 
 Compile: ***Must have JVM installed***
 ```
-git clone
-cd JavaClassTemplate/source
+git clone https://github.com/kevinhubbard/JavaClassTemplate.git;
+cd JavaClassTemplate/source;
 javac -d ../classes net/kevinjr/*.java
 ```
 
