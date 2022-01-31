@@ -103,9 +103,11 @@ public class Gui {
 			if (cc.validImport(testImport) == false) {
 				JOptionPane.showMessageDialog(frame, "Invalid Import name.");
 				textFieldPanel.importTf.setText("");
+				textFieldPanel.importTf.requestFocus();
 			} else {
 				System.out.println(testImport + " was valid.");
 				textFieldPanel.importTf.setText("");
+				textFieldPanel.importTf.requestFocus();
 			}
 		}
 	}
@@ -133,9 +135,12 @@ public class Gui {
 			//~~~VALIDATE INPUT~~~~//
 			if (cc.validImplement(testImplement) == false) {
 				JOptionPane.showMessageDialog(frame, "Invalid Implement name.");
+				textFieldPanel.implementTf.setText("");
+				textFieldPanel.implementTf.requestFocus();
 			} else {
 				System.out.println(testImplement + " was valid.");
 				textFieldPanel.implementTf.setText("");
+				textFieldPanel.implementTf.requestFocus();
 			}
 		}
 	}
@@ -145,9 +150,12 @@ public class Gui {
 			String testClass = classNamePanel.classNameTf.getText();
 			if (cc.validClassName(testClass) == false) {
 				JOptionPane.showMessageDialog(frame, "Invalid Class Name.");
+				classNamePanel.classNameTf.setText("");
+				classNamePanel.classNameTf.requestFocus();
 			} else {
 				cc.isMainClass(checkBoxPanel.mainCb.isSelected());
-				cc.showInfo();
+				//cc.showInfo();
+				cc.createFile();
 				clearScreen();
 			}
 		}
