@@ -4,15 +4,16 @@ Current WIP for version 2:
 - [x] Save class file to a specific folder.
 - [x] Change logic for extends
 - [] Add package input
-- [] Ask if you wou like to build a project dir.
+- [] Build a project directory option.
 - [x] Add input validity
-- [] Show editable 
+- [] Show editable import/implement list.
 
 Compile: ***Must have JVM installed***
 ```
 git clone https://github.com/kevinhubbard/JavaClassTemplate.git;
 cd JavaClassTemplate/source;
-javac -d ../classes net/kevinjr/*.java;
+javac -d ../classes net/kevinjr/*.java
+
 ```
 
 Run:  
