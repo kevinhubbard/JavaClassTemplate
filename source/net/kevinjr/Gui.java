@@ -164,10 +164,9 @@ public class Gui {
 					cc.setSaveLocation(locationString);
 					cc.isMainClass(checkBoxPanel.mainCb.isSelected());
 					cc.createFile();
-					JOptionPane.showMessageDialog(frame, "File successfully created.");
 					clearScreen();
 					//ASK USER IF THEY WANT TO CREATE ANOTHER CLASS OR EXIT
-					int option = JOptionPane.showConfirmDialog(frame, "Add another file?", "WARNING", JOptionPane.YES_NO_OPTION);
+					int option = JOptionPane.showConfirmDialog(frame, "File successfully created!\nAdd another file?", "Create a Class", JOptionPane.YES_NO_OPTION);
 					if (option != 0) {
 						System.exit(0);
 					}
