@@ -76,6 +76,7 @@ public class ClassConstructor {
 			System.out.println("This class does not import anything.");
 			importString = "";
 		} else {
+			importString = "";
 			for (String obj : importInput) {
 				importString += "import " + obj + ";\n";
 			}
@@ -120,6 +121,7 @@ public class ClassConstructor {
 		importString = "";
 		extendString = "";
 		implemString = "";
+		saveLocation = "";
 		importList.clear();
 		implementList.clear();
 		mainBool = false;
@@ -130,11 +132,8 @@ public class ClassConstructor {
 		setImportString(importList);
 		setExtendString(extendString);
 		setImplementString(implementList);
-
-
 		if (mainBool) {
 			try {
-				
 				PrintWriter outputFile = new PrintWriter(saveLocation + className + EXT);
 				outputFile.print(importString);
 				outputFile.print("public class " + className + extendString + implemString + " {\n\t\n");
@@ -144,7 +143,6 @@ public class ClassConstructor {
 			System.out.println("main class made");
 		} else {
 			try {
-				
 				PrintWriter outputFile = new PrintWriter(saveLocation + className + EXT);
 				outputFile.print(importString);	
 				outputFile.print("public class " + className + extendString + implemString + " {\n\t\n}");
@@ -152,9 +150,6 @@ public class ClassConstructor {
 			} catch (IOException ex) {ex.printStackTrace();}
 			System.out.println("not a main class");
 		}
-
-
-
 		resetFields();
 	}
 }
