@@ -1,24 +1,26 @@
 Program that creates a java class file.  
 
 Current WIP for version 2:  
+- [] Add Constructor option
+- [] Build a project directory option.
+- [] Show editable import/implement list.
+- [] Updated GUI
+- [] Add package input
+- [] Add startup popup, demonstrating how to add info.
 - [x] Save class file to a specific folder.
 - [x] Change logic for extends
-- [] Add package input
-- [] Build a project directory option.
 - [x] Add input validity
-- [] Show editable import/implement list.
 
 Compile: ***Must have JVM installed***
 ```
 git clone https://github.com/kevinhubbard/JavaClassTemplate.git;
 cd JavaClassTemplate/source;
-javac -d ../classes net/kevinjr/*.java
-
+javac -d ../classes net/kevinjr/*.java; cd ../
 ```
 
 Run:  
 ```
-cd ../classes; java net/kevinjr/Main
+cd ./classes; java net/kevinjr/Main
 ```
 
 Create JAR:  
