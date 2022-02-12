@@ -5,13 +5,13 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.util.*;
 
-public class TemImplementListPanel extends JPanel {
+public class ImplementListPanel extends JPanel {
 	private ArrayList<String> tList = new ArrayList<String>();
 	private JLabel label = new JLabel("Implement List");
 	private JList list;
 	private JButton btn = new JButton("Remove");
 
-	public TemImplementListPanel() {
+	public ImplementListPanel() {
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		tList.add("Sht");
 		tList.add("fck");

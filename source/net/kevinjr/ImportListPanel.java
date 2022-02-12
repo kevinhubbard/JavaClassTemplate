@@ -5,13 +5,13 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.util.*;
 
-public class TemImportListPanel extends JPanel {
+public class ImportListPanel extends JPanel {
 	private ArrayList<String> tList = new ArrayList<String>();
 	private JLabel label = new JLabel("Import List");
 	private JList list;
 	private JButton btn = new JButton("Remove");
 
-	public TemImportListPanel() {
+	public ImportListPanel() {
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		tList.add("Sht");
 		tList.add("fck");
