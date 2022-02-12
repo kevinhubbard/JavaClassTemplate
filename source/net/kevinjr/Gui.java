@@ -6,10 +6,9 @@ import java.awt.event.*;
 import java.util.*;
 import java.io.*;
 
-public class Gui {
+public class Gui extends JFrame {
 	private String className, extendString;
 	private boolean mainClass;
-	private JFrame frame = new JFrame("Create a Class");
 	private JPanel panel = new JPanel();
 	private NamePanel classNamePanel = new NamePanel();
 	private CbPanel checkBoxPanel = new CbPanel();
@@ -17,7 +16,32 @@ public class Gui {
 	private BtnPanel addBtnPanel = new BtnPanel();
 	private ClassConstructor cc = new ClassConstructor();
 
+	private TemClassPanel classPanel = new TemClassPanel();
+	private TemPackagePanel packPanel = new TemPackagePanel();
+	private TemImportPanel importPanel = new TemImportPanel();
+	private TemExtendPanel extendPanel = new TemExtendPanel();
+	private TemImplementPanel implementPanel = new TemImplementPanel();
+	private TemActionPanel actionPanel = new TemActionPanel();
+	private TemImportListPanel importListPanel = new TemImportListPanel();
+	private TemImplementListPanel implementListPanel = new TemImplementListPanel();
+
 	public Gui() {
+		panel.add(classPanel);
+		panel.add(packPanel);
+		panel.add(importPanel);
+		panel.add(extendPanel);
+		panel.add(implementPanel);
+		panel.add(actionPanel);
+		panel.add(importListPanel);
+		panel.add(implementListPanel);
+
+
+
+
+
+
+
+
 		panel.add(classNamePanel);
 		panel.add(checkBoxPanel);
 		panel.add(textFieldPanel);
@@ -32,13 +56,14 @@ public class Gui {
 		checkBoxPanel.implementCb.addActionListener(new ImplementCbListener());
 		create.addActionListener(new SubmitListener());
 		panel.setBackground(Color.GRAY);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(330, 225);
-		frame.setResizable(false);
-		frame.getContentPane().add(BorderLayout.CENTER, panel);
+		setTitle("oh shit");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(330, 600);
+		setResizable(false);
+		getContentPane().add(BorderLayout.CENTER, panel);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		frame.setLocation((dim.width/2)-(frame.getWidth()/2), (dim.height/2)-(frame.getHeight()/2));
-		frame.setVisible(true);
+		setLocation((dim.width/2)-(getWidth()/2), (dim.height/2)-(getHeight()/2));
+		setVisible(true);
 	}
 
 	private void clearScreen() {
@@ -101,7 +126,7 @@ public class Gui {
 			String testImport = textFieldPanel.importTf.getText();
 			//~~~VALIDATE INPUT~~~~//
 			if (cc.validImport(testImport) == false) {
-				JOptionPane.showMessageDialog(frame, "Invalid Import name.");
+				JOptionPane.showMessageDialog(null, "Invalid Import name.");
 				textFieldPanel.importTf.setText("");
 				textFieldPanel.importTf.requestFocus();
 			} else {
@@ -117,7 +142,7 @@ public class Gui {
 			String testExtend = textFieldPanel.extendTf.getText();
 			//~~~VALIDATE INPUT~~~~//
 			if (cc.validExtend(testExtend) == false ) {
-				JOptionPane.showMessageDialog(frame, "Invalid Extend name.");
+				JOptionPane.showMessageDialog(null, "Invalid Extend name.");
 				textFieldPanel.extendTf.setText(extendString);
 				checkBoxPanel.extendCb.setSelected(false);
 			} else {
@@ -134,7 +159,7 @@ public class Gui {
 			String testImplement = textFieldPanel.implementTf.getText();
 			//~~~VALIDATE INPUT~~~~//
 			if (cc.validImplement(testImplement) == false) {
-				JOptionPane.showMessageDialog(frame, "Invalid Implement name.");
+				JOptionPane.showMessageDialog(null, "Invalid Implement name.");
 				textFieldPanel.implementTf.setText("");
 				textFieldPanel.implementTf.requestFocus();
 			} else {
@@ -149,14 +174,14 @@ public class Gui {
 		public void actionPerformed(ActionEvent e) {
 			String testName = classNamePanel.classNameTf.getText();
 			if (cc.validName(testName) == false) {
-				JOptionPane.showMessageDialog(frame, "Invalid Class Name.");
+				JOptionPane.showMessageDialog(null, "Invalid Class Name.");
 				classNamePanel.classNameTf.setText("");
 				classNamePanel.classNameTf.requestFocus();
 			} else {
 				JFileChooser f = new JFileChooser();
 				f.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 				f.setCurrentDirectory(new File(System.getProperty("user.home")));
-				int returnVal = f.showSaveDialog(frame);
+				int returnVal = f.showSaveDialog(null);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					System.out.println("Save approved.");
 					File saveLoc = f.getSelectedFile();
@@ -166,7 +191,7 @@ public class Gui {
 					cc.createFile();
 					clearScreen();
 					//ASK USER IF THEY WANT TO CREATE ANOTHER CLASS OR EXIT
-					int option = JOptionPane.showConfirmDialog(frame, "File successfully created!\nAdd another file?", "Create a Class", JOptionPane.YES_NO_OPTION);
+					int option = JOptionPane.showConfirmDialog(null, "File successfully created!\nAdd another file?", "Create a Class", JOptionPane.YES_NO_OPTION);
 					if (option != 0) {
 						System.exit(0);
 					}
