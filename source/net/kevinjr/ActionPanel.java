@@ -12,6 +12,7 @@ public class ActionPanel extends JPanel {
 	public ActionPanel() {
 		setPreferredSize(new Dimension(250, 40));
 		clearBtn.addActionListener(new ClearListener());
+		saveBtn.addActionListener(new SaveListener());
 		add(clearBtn);
 		add(saveBtn);
 	}
@@ -35,25 +36,7 @@ public class ActionPanel extends JPanel {
 }
 
 
-/*	private void clearScreen() {
-		classNamePanel.classNameTf.setText("");
-		textFieldPanel.importTf.setText("");
-		textFieldPanel.extendTf.setText("");
-		textFieldPanel.implementTf.setText("");
-		checkBoxPanel.mainCb.setSelected(false);
-		checkBoxPanel.importCb.setSelected(false);
-		checkBoxPanel.extendCb.setSelected(false);
-		checkBoxPanel.implementCb.setSelected(false);
-		className = null;
-		mainClass = false;
-		extendString = null;
-		textFieldPanel.importTf.setEnabled(false);
-		addBtnPanel.importBtn.setEnabled(false);
-		textFieldPanel.implementTf.setEnabled(false);
-		addBtnPanel.implementBtn.setEnabled(false);
-	}
-
-
+/*	
 	private class SubmitListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			String testName = classNamePanel.classNameTf.getText();
