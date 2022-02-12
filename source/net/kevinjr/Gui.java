@@ -2,30 +2,28 @@ package net.kevinjr;
 
 import java.awt.*;
 import javax.swing.*;
-import java.awt.event.*;
 
-public class Gui extends JPanel{
-	private String className, extendString;
-	private boolean mainClass;
-	private ClassConstructor cc = new ClassConstructor();
+public class Gui extends JPanel {
 
-	private TemClassPanel classPanel = new TemClassPanel();
-	private TemPackagePanel packPanel = new TemPackagePanel();
-	private TemImportPanel importPanel = new TemImportPanel();
-	private TemExtendPanel extendPanel = new TemExtendPanel();
-	private TemImplementPanel implementPanel = new TemImplementPanel();
-	private TemActionPanel actionPanel = new TemActionPanel();
-	private TemImportListPanel importListPanel = new TemImportListPanel();
-	private TemImplementListPanel implementListPanel = new TemImplementListPanel();
+	private ClassPanel classPanel = new ClassPanel();
+	private PackagePanel packPanel = new PackagePanel();
+	private ImportPanel importPanel = new ImportPanel();
+	private ExtendPanel extendPanel = new ExtendPanel();
+	private ImplementPanel implementPanel = new ImplementPanel();
+	private ImportListPanel importListPanel = new ImportListPanel();
+	private ImplementListPanel implementListPanel = new ImplementListPanel();
+	private OptionPanel optionPanel = new OptionPanel();
+	private ActionPanel actionPanel = new ActionPanel();
 
 	public Gui() {
 		add(classPanel);
 		add(packPanel);
 		add(importPanel);
-		add(importListPanel);
 		add(extendPanel);
 		add(implementPanel);
+		add(importListPanel);
 		add(implementListPanel);
+		add(optionPanel);
 		add(actionPanel);
 		setBackground(Color.GRAY);
 	}
