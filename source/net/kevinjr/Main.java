@@ -8,7 +8,7 @@ public class Main extends JFrame {
 	public void start() {
 		setTitle("Create A Class");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(330, 600);
+		setSize(330, 475);
 		setResizable(false);
 		getContentPane().add(BorderLayout.CENTER, new Gui());
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
