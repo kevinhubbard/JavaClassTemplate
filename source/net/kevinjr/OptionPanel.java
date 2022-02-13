@@ -29,4 +29,17 @@ public class OptionPanel extends JPanel {
 	public static boolean returnMain() {
 		return mainBox.isSelected();
 	}
+
+	public static boolean returnPriv() {
+		return privBox.isSelected();
+	}
+
+	public static boolean returnCons() {
+		return consBox.isSelected();
+	}
+
+	public static boolean returnDir() {
+		return projBox.isSelected();
+	}	
+
 }
