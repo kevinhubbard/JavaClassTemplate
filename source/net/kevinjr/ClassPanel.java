@@ -16,4 +16,12 @@ public class ClassPanel extends JPanel {
 	public static void clearFields() {
 		input.setText("");
 	}
+
+	public static String returnClassName() {
+		return input.getText();
+	}
+
+	public static void focus() {
+		input.requestFocus();
+	}
 }

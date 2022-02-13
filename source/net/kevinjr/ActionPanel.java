@@ -3,6 +3,7 @@ package net.kevinjr;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.io.*;
 
 public class ActionPanel extends JPanel {
 
@@ -30,41 +31,40 @@ public class ActionPanel extends JPanel {
 
 	private class SaveListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			System.out.println("save listener");
-		}
-	}
-}
-
-
-/*	
-	private class SubmitListener implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			String testName = classNamePanel.classNameTf.getText();
-			if (cc.validName(testName) == false) {
-				JOptionPane.showMessageDialog(null, "Invalid Class Name.");
-				classNamePanel.classNameTf.setText("");
-				classNamePanel.classNameTf.requestFocus();
+			String test = ClassPanel.returnClassName();
+			if (ClassConstructor.validName(test) == false) {
+				JOptionPane.showMessageDialog(null, "Invalid name");
+				ClassPanel.clearFields();
+				ClassPanel.focus();
 			} else {
-				JFileChooser f = new JFileChooser();
-				f.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-				f.setCurrentDirectory(new File(System.getProperty("user.home")));
-				int returnVal = f.showSaveDialog(null);
+				JFileChooser file = new JFileChooser();
+				file.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+				file.setCurrentDirectory(new File(System.getProperty("user.home")));
+				int returnVal = file.showSaveDialog(null);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
-					System.out.println("Save approved.");
-					File saveLoc = f.getSelectedFile();
+					File saveLoc = file.getSelectedFile();
 					String locationString = saveLoc.getAbsolutePath();
-					cc.setSaveLocation(locationString);
-					cc.isMainClass(checkBoxPanel.mainCb.isSelected());
-					cc.createFile();
-					clearScreen();
-					//ASK USER IF THEY WANT TO CREATE ANOTHER CLASS OR EXIT
-					int option = JOptionPane.showConfirmDialog(null, "File successfully created!\nAdd another file?", "Create a Class", JOptionPane.YES_NO_OPTION);
+					ClassConstructor.setSaveLocation(locationString);
+					ClassConstructor.isMainClass(OptionPanel.returnMain());
+					ClassConstructor.createFile();
+
+					//CLEAR USER INPUT
+					ClassPanel.clearFields();
+					PackagePanel.clearFields();
+					ImportPanel.clearFields();
+					ExtendPanel.clearFields();
+					ImplementPanel.clearFields();
+					OptionPanel.clearFields();
+
+					//ASK USER IF THEY WANT TO ADD ANOTHER CLASS OR QUIT
+					int option = JOptionPane.showConfirmDialog(null, "File successfully created!\nAdd another class?", "Create a Class", JOptionPane.YES_NO_OPTION);
 					if (option != 0) {
 						System.exit(0);
 					}
 				} else {
-					System.out.println("Save selection canceled.");
-				}	
+					System.out.println("Save canceled.");
+				}
 			}
 		}
-	}*/
+	}
+}

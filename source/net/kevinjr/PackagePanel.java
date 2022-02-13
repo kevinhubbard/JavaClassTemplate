@@ -9,7 +9,6 @@ public class PackagePanel extends JPanel {
 	private JLabel label = new JLabel("Name: ");
 	private static JTextField input = new JTextField(5);
 	private static JButton btn = new JButton("Update");
-	private ClassConstructor cc = new ClassConstructor();
 
 	public PackagePanel() {
 		btn.setEnabled(false);

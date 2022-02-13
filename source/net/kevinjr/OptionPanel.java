@@ -25,4 +25,8 @@ public class OptionPanel extends JPanel {
 		consBox.setSelected(false);
 		projBox.setSelected(false);
 	}
+
+	public static boolean returnMain() {
+		return mainBox.isSelected();
+	}
 }
