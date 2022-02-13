@@ -5,8 +5,8 @@ import java.util.*;
 
 public class ClassConstructor {
 	final static String EXT = ".java";
-	private static String className, importString, extendString, implemString, saveLocation;
-	private static boolean mainBool;
+	private static String className, accessString, importString, extendString, implemString, constructString, saveLocation;
+	private static boolean mainBool, privateBool, constructBool, dirBool;
 	private static ArrayList<String> importList = new ArrayList<String>();
 	private static ArrayList<String> implementList = new ArrayList<String>();
 
@@ -59,11 +59,33 @@ public class ClassConstructor {
 	}
 //~~~~~~~~~~~~~~~~~~~~~~~SET METHODS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-	public static void isMainClass(boolean tb) {
-		if (tb == true) {
+	public static void setupBools(boolean mb, boolean pb, boolean cb, boolean dir) {
+		// CHECK FOR MAIN CLASS
+		if (mb == true) {
 			mainBool = true;
 		} else {
 			mainBool = false;
+		}
+
+		// CHECK FOR PRIVATE CLASS
+		if (pb == true) {
+			accessString = "private";
+		} else {
+			accessString = "public";
+		}
+
+		// CHECK FOR CONSTRUCTOR CLASS
+		if (cb == true) {
+			constructString = "\n\t//Constructor\n\tpublic " + className + "() {\n\t\n\t}";
+		} else {
+			constructString = "";
+		}
+
+		// CHECK FOR PROJECT DIRECTORY CREATION
+		if (dir == true) {
+			dirBool = true;
+		} else {
+			dirBool = false;
 		}
 	}
 
@@ -121,10 +143,15 @@ public class ClassConstructor {
 		importString = "";
 		extendString = "";
 		implemString = "";
+		accessString = "";
+		constructString = "";
 		saveLocation = "";
 		importList.clear();
 		implementList.clear();
 		mainBool = false;
+		privateBool = false;
+		constructBool = false;
+		dirBool = false;
 	}
 
 	public static void createFile() {
@@ -136,8 +163,8 @@ public class ClassConstructor {
 			try {
 				PrintWriter outputFile = new PrintWriter(saveLocation + className + EXT);
 				outputFile.print(importString);
-				outputFile.print("public class " + className + extendString + implemString + " {\n\t\n");
-				outputFile.print("\tpublic static void main(String[] args) {\n\t\t\n\t}\n}");
+				outputFile.print(accessString + " class " + className + extendString + implemString + " {\n\t" + constructString + "\n");
+				outputFile.print("\n\tpublic static void main(String[] args) {\n\t\t\n\t}\n}");
 				outputFile.close();
 			} catch (IOException ex) {ex.printStackTrace();}
 			System.out.println("main class made");
@@ -145,7 +172,7 @@ public class ClassConstructor {
 			try {
 				PrintWriter outputFile = new PrintWriter(saveLocation + className + EXT);
 				outputFile.print(importString);	
-				outputFile.print("public class " + className + extendString + implemString + " {\n\t\n}");
+				outputFile.print(accessString + " class " + className + extendString + implemString + " {\n\t" + constructString + "\n}");
 				outputFile.close();
 			} catch (IOException ex) {ex.printStackTrace();}
 			System.out.println("not a main class");
