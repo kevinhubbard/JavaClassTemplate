@@ -45,7 +45,7 @@ public class ActionPanel extends JPanel {
 					File saveLoc = file.getSelectedFile();
 					String locationString = saveLoc.getAbsolutePath();
 					ClassConstructor.setSaveLocation(locationString);
-					ClassConstructor.isMainClass(OptionPanel.returnMain());
+					ClassConstructor.setupBools(OptionPanel.returnMain(), OptionPanel.returnPriv(), OptionPanel.returnCons(), OptionPanel.returnDir());
 					ClassConstructor.createFile();
 
 					//CLEAR USER INPUT
