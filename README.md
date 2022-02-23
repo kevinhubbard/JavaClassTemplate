@@ -18,15 +18,15 @@ cd JavaClassTemplate/source;
 javac -d ../classes net/kevinjr/*.java; cd ../
 ```
 
-Run:  
+Run:  First navigate to classes/ directory.
 ```
-cd ./classes; java net/kevinjr/Main
+java -splash:../images/ccLogo.png net/kevinjr/Main
 ```
 
 Create JAR:  
 Compile the same way as above.  
 Go to classes directory.
 ```
-jar -cvmf manifest.txt "Class Constructor".jar net
+jar -cvmf manifest.mf "Class Constructor".jar net ../images/ccLogo.png
 ``` 
 If no errors a JAR file will be created in the classes directory.
