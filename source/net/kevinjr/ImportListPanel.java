@@ -13,9 +13,9 @@ public class ImportListPanel extends JPanel {
 
 	public ImportListPanel() {
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-		tList.add("Sht");
+/*		tList.add("Sht");
 		tList.add("fck");
-		tList.add("lofi");
+		tList.add("lofi");*/
 
 		list = new JList(tList.toArray());
 
