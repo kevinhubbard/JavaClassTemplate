@@ -4,15 +4,15 @@ import java.io.*;
 import java.util.*;
 
 public class ClassConstructor {
-	final static String EXT = ".java";
-	private static String className, accessString, importString, extendString, implemString, constructString, saveLocation;
-	private static boolean mainBool, privateBool, constructBool, dirBool;
-	private static ArrayList<String> importList = new ArrayList<String>();
-	private static ArrayList<String> implementList = new ArrayList<String>();
+	final String EXT = ".java";
+	private String className, accessString, importString, extendString, implemString, constructString, saveLocation;
+	private boolean mainBool, privateBool, constructBool, dirBool;
+	private ArrayList<String> importList = new ArrayList<String>();
+	private ArrayList<String> implementList = new ArrayList<String>();
 
 //~~~~~~~~~~~~~~~~~~~VALIDATION METHODS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-	public static boolean validName(String classTestStr) {
+	public boolean validName(String classTestStr) {
 		boolean classTest = false;
 		classTestStr = classTestStr.replaceAll("\\s", "");
 		if (classTestStr.length() != 0) {
@@ -59,7 +59,7 @@ public class ClassConstructor {
 	}
 //~~~~~~~~~~~~~~~~~~~~~~~SET METHODS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-	public static void setupBools(boolean mb, boolean pb, boolean cb, boolean dir) {
+	public void setupBools(boolean mb, boolean pb, boolean cb, boolean dir) {
 		// CHECK FOR MAIN CLASS
 		if (mb == true) {
 			mainBool = true;
@@ -89,11 +89,11 @@ public class ClassConstructor {
 		}
 	}
 
-	public static void setClassString(String classStr) {
+	public void setClassString(String classStr) {
 		className = classStr.substring(0,1).toUpperCase() + classStr.substring(1);
 	}
 
-	public static void setImportString(ArrayList<String> importInput) {
+	public void setImportString(ArrayList<String> importInput) {
 		if (importInput.size() == 0 ) {
 			System.out.println("This class does not import anything.");
 			importString = "";
@@ -106,7 +106,7 @@ public class ClassConstructor {
 		}
 	} 
 
-	public static void setExtendString(String extendInput) {
+	public void setExtendString(String extendInput) {
 		if (extendInput == null || extendInput.length() == 0) {
 			System.out.println("This class does not extend anything.");
 			extendString = "";
@@ -115,7 +115,7 @@ public class ClassConstructor {
 		}
 	}
 
-	public static void setImplementString(ArrayList<String> implementInput) {
+	public void setImplementString(ArrayList<String> implementInput) {
 		if (implementInput.size() == 0 ) {
 			System.out.println("This class does not implement anything.");
 			implemString = "";
@@ -133,12 +133,12 @@ public class ClassConstructor {
 		}
 	}
 
-	public static void setSaveLocation(String l) {
+	public void setSaveLocation(String l) {
 		saveLocation = l + "/";
 	}
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-	private static void resetFields() {
+	private void resetFields() {
 		className = "";
 		importString = "";
 		extendString = "";
@@ -154,7 +154,7 @@ public class ClassConstructor {
 		dirBool = false;
 	}
 
-	public static void createFile() {
+	public void createFile() {
 		setClassString(className);
 		setImportString(importList);
 		setExtendString(extendString);

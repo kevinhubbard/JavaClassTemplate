@@ -10,6 +10,14 @@ public class ActionPanel extends JPanel {
 	private JButton clearBtn = new JButton("Clear");
 	private JButton saveBtn = new JButton("Save");
 
+	private ClassPanel cp = new ClassPanel();
+	private PackagePanel pp = new PackagePanel();
+	private ImportPanel ip = new ImportPanel();
+	private ExtendPanel ep = new ExtendPanel();
+	private ImplementPanel mp = new ImplementPanel();
+	private OptionPanel op = new OptionPanel();
+	private ClassConstructor cc = new ClassConstructor();
+
 	public ActionPanel() {
 		setPreferredSize(new Dimension(250, 40));
 		clearBtn.addActionListener(new ClearListener());
@@ -20,22 +28,22 @@ public class ActionPanel extends JPanel {
 
 	private class ClearListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			ClassPanel.clearFields();
-			PackagePanel.clearFields();
-			ImportPanel.clearFields();
-			ExtendPanel.clearFields();
-			ImplementPanel.clearFields();
-			OptionPanel.clearFields();
+			cp.clearFields();
+			pp.clearFields();
+			ip.clearFields();
+			ep.clearFields();
+			mp.clearFields();
+			op.clearFields();
 		}
 	}
 
 	private class SaveListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			String test = ClassPanel.returnClassName();
-			if (ClassConstructor.validName(test) == false) {
+			String test = cp.returnClassName();
+			if (cc.validName(test) == false) {
 				JOptionPane.showMessageDialog(null, "Invalid name");
-				ClassPanel.clearFields();
-				ClassPanel.focus();
+				cp.clearFields();
+				cp.focus();
 			} else {
 				JFileChooser file = new JFileChooser();
 				file.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -44,17 +52,17 @@ public class ActionPanel extends JPanel {
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					File saveLoc = file.getSelectedFile();
 					String locationString = saveLoc.getAbsolutePath();
-					ClassConstructor.setSaveLocation(locationString);
-					ClassConstructor.setupBools(OptionPanel.returnMain(), OptionPanel.returnPriv(), OptionPanel.returnCons(), OptionPanel.returnDir());
-					ClassConstructor.createFile();
+					cc.setSaveLocation(locationString);
+					cc.setupBools(op.returnMain(), op.returnPriv(), op.returnCons(), op.returnDir());
+					cc.createFile();
 
 					//CLEAR USER INPUT
-					ClassPanel.clearFields();
-					PackagePanel.clearFields();
-					ImportPanel.clearFields();
-					ExtendPanel.clearFields();
-					ImplementPanel.clearFields();
-					OptionPanel.clearFields();
+					cp.clearFields();
+					pp.clearFields();
+					ip.clearFields();
+					ep.clearFields();
+					mp.clearFields();
+					op.clearFields();
 
 					//ASK USER IF THEY WANT TO ADD ANOTHER CLASS OR QUIT
 					int option = JOptionPane.showConfirmDialog(null, "File successfully created!\nAdd another class?", "Create a Class", JOptionPane.YES_NO_OPTION);

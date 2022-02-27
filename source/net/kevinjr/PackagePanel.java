@@ -5,10 +5,10 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class PackagePanel extends JPanel {
-	private static JCheckBox box = new JCheckBox("Package");
+	private JCheckBox box = new JCheckBox("Package");
 	private JLabel label = new JLabel("Name: ");
-	private static JTextField input = new JTextField(5);
-	private static JButton btn = new JButton("Update");
+	private JTextField input = new JTextField(5);
+	private JButton btn = new JButton("Update");
 
 	public PackagePanel() {
 		btn.setEnabled(false);
@@ -21,7 +21,7 @@ public class PackagePanel extends JPanel {
 		add(btn);
 	}
 
-	public static void clearFields() {
+	public void clearFields() {
 		box.setSelected(false);
 		input.setText("");
 		input.setEnabled(false);

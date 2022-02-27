@@ -5,7 +5,7 @@ import javax.swing.*;
 
 public class Main extends JFrame {
 
-	public void start() {
+	public void createFrame() {
 		setTitle("Create A Class");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(330, 475);
@@ -17,6 +17,6 @@ public class Main extends JFrame {
 	}
 	
 	public static void main(String[] args) {
-		new Main().start();
+		new Main().createFrame();
 	}
 }
