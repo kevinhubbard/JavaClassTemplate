@@ -3,8 +3,15 @@ package net.kevinjr;
 import java.awt.*;
 import javax.swing.*;
 
-public class Main extends JFrame {
+/**
+ * @author Kevin H
+ * @version 1.0.1
+ */
 
+public class Main extends JFrame {
+	/**
+	   
+	 */
 	public void createFrame() {
 		setTitle("Create A Class");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
