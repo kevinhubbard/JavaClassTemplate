@@ -4,14 +4,17 @@ import java.awt.*;
 import javax.swing.*;
 
 /**
- * @author Kevin H
- * @version 1.0.1
- */
+* This program takes user input and creates the framework of a java file.
+* 
+* @author Kevin H
+* @version 1.0.1
+* @since 2022-01-16
+*/
 
 public class Main extends JFrame {
 	/**
-	   
-	 */
+	* This method creates a new JFrame and gives it some default settings.
+	*/
 	public void createFrame() {
 		setTitle("Create A Class");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -24,6 +27,7 @@ public class Main extends JFrame {
 	}
 	
 	public static void main(String[] args) {
+		//launch program
 		new Main().createFrame();
 	}
 }
