@@ -15,7 +15,7 @@ import javax.swing.*;
 
 public class ClassPanel extends JPanel {
 	private JLabel label = new JLabel("Class Name");
-	private JTextField input = new JTextField(5);
+	private JTextField input = new JTextField(10);
 
 	/**
 	* Class constructor adds label and textfield to panel. 

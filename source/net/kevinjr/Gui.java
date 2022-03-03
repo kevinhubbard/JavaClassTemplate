@@ -1,7 +1,9 @@
 package net.kevinjr;
 
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
+import java.io.*;
 
 /**
 * This class takes all the subpanel objects and adds them to the main panel. 
@@ -20,13 +22,21 @@ public class Gui extends JPanel {
 	private ImplementPanel implementPanel = new ImplementPanel();
 	private ImportListPanel importListPanel = new ImportListPanel();
 	private OptionPanel optionPanel = new OptionPanel();
-	private ActionPanel actionPanel = new ActionPanel();
+	private JPanel actionPanel = new JPanel();
+	private ClassConstructor cc = new ClassConstructor();
+
+	private JButton savebtn = new JButton("Save");
+	private JButton clearbtn = new JButton("Clear");
 
 	/**
 	* No arg constructor that adds all panels together.
 	*/
-
 	public Gui() {
+		actionPanel.setPreferredSize(new Dimension(250, 40));
+		actionPanel.add(clearbtn);
+		actionPanel.add(savebtn);
+		savebtn.addActionListener(new SaveListener());
+		clearbtn.addActionListener(new ClearListener());
 		add(classPanel);
 		add(packPanel);
 		add(importPanel);
@@ -36,5 +46,70 @@ public class Gui extends JPanel {
 		add(optionPanel);
 		add(actionPanel);
 		setBackground(Color.GRAY);
+	}
+
+	/**
+	* ClearListener is a private action listener which calls the
+	* clearFields method of each class to remove all user input.
+	*/
+	private class ClearListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			classPanel.clearFields();
+			packPanel.clearFields();
+			importPanel.clearFields();
+			extendPanel.clearFields();
+			implementPanel.clearFields();
+			optionPanel.clearFields();
+		}
+	}
+
+	/**
+	* SaveListener is a private action listener which saves the user
+	* input and creates the requested java file. It first checks that 
+	* the class name input is valid. If it is, it lets the user select
+	* which directory they would like to save to save the file to. 
+	* It clears the input fields if input is successfully saved and asks
+	* user if they would like to create another file.
+	*/
+	private class SaveListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			String test = classPanel.returnClassName();
+
+			// VALIDATE CLASS NAME INPUT
+			if (cc.validName(test) == false) {
+				JOptionPane.showMessageDialog(null, "Invalid name");
+				classPanel.clearFields();
+				classPanel.focus();
+			} else {
+				// CHOOSE DIRECTORY LOCATION UPON SUCCESSFUL VALIDATION
+				JFileChooser file = new JFileChooser();
+				file.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+				file.setCurrentDirectory(new File(System.getProperty("user.home")));
+				int returnVal = file.showSaveDialog(null);
+				if (returnVal == JFileChooser.APPROVE_OPTION) {
+					File saveLoc = file.getSelectedFile();
+					String locationString = saveLoc.getAbsolutePath();
+					cc.setSaveLocation(locationString);
+					cc.setupBools(optionPanel.returnMain(), optionPanel.returnPriv(), optionPanel.returnCons(), optionPanel.returnDir());
+					cc.createFile();
+
+					// CLEAR USER INPUT
+					classPanel.clearFields();
+					packPanel.clearFields();
+					importPanel.clearFields();
+					extendPanel.clearFields();
+					implementPanel.clearFields();
+					optionPanel.clearFields();
+
+					// ASK USER IF THEY WANT TO ADD ANOTHER CLASS OR QUIT
+					int option = JOptionPane.showConfirmDialog(null, "File successfully created!\nAdd another class?", "Create a Class", JOptionPane.YES_NO_OPTION);
+					if (option != 0) {
+						System.exit(0);
+					}
+				} else {
+					System.out.println("Save canceled.");
+				}
+			}
+		}
 	}
 }
