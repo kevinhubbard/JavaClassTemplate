@@ -17,7 +17,7 @@ public class ClassConstructor {
 		classTestStr = classTestStr.replaceAll("\\s", "");
 		if (classTestStr.length() != 0) {
 			classTest = true;
-			className = classTestStr;
+			className = classTestStr.substring(0,1).toUpperCase() + classTestStr.substring(1);
 		}
 		return classTest;
 	}
@@ -40,7 +40,7 @@ public class ClassConstructor {
 		if (extStr == null || extStr.length() == 0) {
 			System.out.println("not valid extend String");
 		} else {
-			extendString = extStr;
+			extendString =  " extends " + extStr;
 			extendTest = true;
 		}
 		return extendTest;
@@ -89,10 +89,6 @@ public class ClassConstructor {
 		}
 	}
 
-	public void setClassString(String classStr) {
-		className = classStr.substring(0,1).toUpperCase() + classStr.substring(1);
-	}
-
 	public void setImportString(ArrayList<String> importInput) {
 		if (importInput.size() == 0 ) {
 			System.out.println("This class does not import anything.");
@@ -106,14 +102,14 @@ public class ClassConstructor {
 		}
 	} 
 
-	public void setExtendString(String extendInput) {
+/*	public void setExtendString(String extendInput) {
 		if (extendInput == null || extendInput.length() == 0) {
 			System.out.println("This class does not extend anything.");
 			extendString = "";
 		} else {
 			extendString = " extends " + extendInput;
 		}
-	}
+	}*/
 
 	public void setImplementString(ArrayList<String> implementInput) {
 		if (implementInput.size() == 0 ) {
@@ -155,15 +151,14 @@ public class ClassConstructor {
 	}
 
 	public void createFile() {
-		setClassString(className);
 		setImportString(importList);
-		setExtendString(extendString);
+		//setExtendString(extendString);
 		setImplementString(implementList);
 		if (mainBool) {
 			try {
 				PrintWriter outputFile = new PrintWriter(saveLocation + className + EXT);
 				outputFile.print(importString);
-				outputFile.print(accessString + " class " + className + extendString + implemString + " {\n\t" + constructString + "\n");
+				outputFile.print(accessString + " class " + className + extendString + implemString + " {\n\t" + constructString);
 				outputFile.print("\n\tpublic static void main(String[] args) {\n\t\t\n\t}\n}");
 				outputFile.close();
 			} catch (IOException ex) {ex.printStackTrace();}

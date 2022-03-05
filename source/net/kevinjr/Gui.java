@@ -73,11 +73,16 @@ public class Gui extends JPanel {
 	*/
 	private class SaveListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			String test = classPanel.returnClassName();
+			String nameTest = classPanel.getClassName();
+			String extendTest = extendPanel.getExtendName();
 
 			// VALIDATE CLASS NAME INPUT
-			if (cc.validName(test) == false) {
-				JOptionPane.showMessageDialog(null, "Invalid name");
+			if (cc.validExtend(extendTest) == false) {
+				JOptionPane.showMessageDialog(null, "Invalid Extend Name");
+				extendPanel.clearFields();
+				extendPanel.focus();
+			} else if (cc.validName(nameTest) == false) {
+				JOptionPane.showMessageDialog(null, "Invalid Class Name");
 				classPanel.clearFields();
 				classPanel.focus();
 			} else {

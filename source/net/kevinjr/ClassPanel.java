@@ -36,7 +36,7 @@ public class ClassPanel extends JPanel {
 	* The returnClassName is a getter method which returns a string 
 	* of the currently entered class name.
 	*/
-	public String returnClassName() {
+	public String getClassName() {
 		return input.getText();
 	}
 
