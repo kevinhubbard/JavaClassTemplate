@@ -30,8 +30,17 @@ public class ExtendPanel extends JPanel {
 	}
 
 	public String getExtendName() {
-		return input.getText();
+		String returnString;
+		if (box.isSelected() == true) {
+			returnString = input.getText();
+		} else {
+			returnString = "";
+		}
+		
+		System.out.println("returning " + returnString.length());
+		return returnString;
 	}
+
 
 	/**
 	* The focus method sets the mouse cursor to the current text input box.

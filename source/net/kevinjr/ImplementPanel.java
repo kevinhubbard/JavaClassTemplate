@@ -8,7 +8,7 @@ public class ImplementPanel extends JPanel {
 	private JCheckBox box = new JCheckBox("Implements");
 	private JLabel label = new JLabel("Name: ");
 	private JTextField input = new JTextField(5);
-	private JButton btn = new JButton("Update");
+	private JButton btn = new JButton("Add");
 	private ClassConstructor cc = new ClassConstructor();
 
 	public ImplementPanel() {

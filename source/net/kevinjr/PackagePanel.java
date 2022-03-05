@@ -16,22 +16,32 @@ import javax.swing.*;
 public class PackagePanel extends JPanel {
 	private JCheckBox box = new JCheckBox("Package");
 	private JLabel label = new JLabel("Name: ");
-	private JTextField input = new JTextField(5);
-	private JButton btn = new JButton("Update");
+	private JTextField input = new JTextField(10);
+	//private JButton btn = new JButton("Update");
 
 	/**
 	* No arg constructor that initally sets input to disabled,
 	* sets listeners on the inputs and adds them to the panel.
 	*/ 
 	public PackagePanel() {
-		btn.setEnabled(false);
+		//btn.setEnabled(false);
 		input.setEnabled(false);
 		box.addActionListener(new CheckBoxListener());
-		btn.addActionListener(new UpdateListener());
+		//btn.addActionListener(new UpdateListener());
 		add(box);
 		add(label);
 		add(input);
-		add(btn);
+		//add(btn);
+	}
+
+	public String getPackageName() {
+		String ps = "";
+		if (box.isSelected()) {
+			ps = input.getText();
+		} else {
+			ps = "";
+		}
+		return ps;
 	}
 
 	/**
@@ -42,7 +52,7 @@ public class PackagePanel extends JPanel {
 		box.setSelected(false);
 		input.setText("");
 		input.setEnabled(false);
-		btn.setEnabled(false);
+		//btn.setEnabled(false);
 	}
 
 	/**
@@ -54,10 +64,10 @@ public class PackagePanel extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			if (box.isSelected()) {
 				input.setEnabled(true);
-				btn.setEnabled(true);
+				//btn.setEnabled(true);
 			} else {
 				input.setEnabled(false);
-				btn.setEnabled(false);
+				//btn.setEnabled(false);
 			}
 		}
 	}
@@ -66,10 +76,10 @@ public class PackagePanel extends JPanel {
 	* The inner UpdaterListener class is a private class that tells the
 	* what is happening via command prompt. ONLY USEFUL WHEN DEBUGGING. 
 	*/
-	private class UpdateListener implements ActionListener {
+/*	private class UpdateListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			System.out.println(input.getText());
 			System.out.println(box.isSelected());
 		}
-	}
+	}*/
 }

@@ -5,7 +5,7 @@ import java.util.*;
 
 public class ClassConstructor {
 	final String EXT = ".java";
-	private String className, accessString, importString, extendString, implemString, constructString, saveLocation;
+	private String className, accessString, importString, extendString, implemString, packageString, constructString, saveLocation;
 	private boolean mainBool, privateBool, constructBool, dirBool;
 	private ArrayList<String> importList = new ArrayList<String>();
 	private ArrayList<String> implementList = new ArrayList<String>();
@@ -38,7 +38,8 @@ public class ClassConstructor {
 		boolean extendTest = false;
 		extStr = extStr.replaceAll("\\s", "");
 		if (extStr == null || extStr.length() == 0) {
-			System.out.println("not valid extend String");
+			System.out.println("extend string = nada");
+			extendString = "";
 		} else {
 			extendString =  " extends " + extStr;
 			extendTest = true;
@@ -56,6 +57,19 @@ public class ClassConstructor {
 			impleTest = true;
 		}
 		return impleTest;
+	}
+
+	public boolean validatePackage(String packStr) {
+		boolean packTest = false;
+		packStr = packStr.replaceAll("\\s", "");
+		if (packStr == null || packStr.length() == 0) {
+			System.out.println("not a package");
+			packageString = "";
+		} else {
+			packageString = "package " + packStr + ";\n\n";
+			packTest = true;
+		}
+		return packTest;
 	}
 //~~~~~~~~~~~~~~~~~~~~~~~SET METHODS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -157,6 +171,7 @@ public class ClassConstructor {
 		if (mainBool) {
 			try {
 				PrintWriter outputFile = new PrintWriter(saveLocation + className + EXT);
+				outputFile.print(packageString);
 				outputFile.print(importString);
 				outputFile.print(accessString + " class " + className + extendString + implemString + " {\n\t" + constructString);
 				outputFile.print("\n\tpublic static void main(String[] args) {\n\t\t\n\t}\n}");
@@ -166,6 +181,7 @@ public class ClassConstructor {
 		} else {
 			try {
 				PrintWriter outputFile = new PrintWriter(saveLocation + className + EXT);
+				outputFile.print(packageString);
 				outputFile.print(importString);	
 				outputFile.print(accessString + " class " + className + extendString + implemString + " {\n\t" + constructString + "\n}");
 				outputFile.close();
