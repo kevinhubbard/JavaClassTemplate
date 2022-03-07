@@ -8,7 +8,7 @@ public class ImportPanel extends JPanel {
 	private JCheckBox box = new JCheckBox("Imports");
 	private JLabel label = new JLabel("Name: ");
 	private JTextField input = new JTextField(5);
-	private JButton btn = new JButton("Update");
+	private JButton btn = new JButton("Add");
 	private ClassConstructor cc = new ClassConstructor();
 
 	public ImportPanel() {
@@ -33,7 +33,7 @@ public class ImportPanel extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			String testImport = input.getText();
 			//~~~VALIDATE INPUT~~~~//
-			if (cc.validImport(testImport) == false) {
+			if (cc.validateImport(testImport) == false) {
 				JOptionPane.showMessageDialog(null, "Invalid Import name.");
 				input.setText("");
 				input.requestFocus();

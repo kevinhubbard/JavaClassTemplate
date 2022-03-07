@@ -12,7 +12,7 @@ public class ClassConstructor {
 
 //~~~~~~~~~~~~~~~~~~~VALIDATION METHODS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-	public boolean validName(String classTestStr) {
+	public boolean validateName(String classTestStr) {
 		boolean classTest = false;
 		classTestStr = classTestStr.replaceAll("\\s", "");
 		if (classTestStr.length() != 0) {
@@ -22,54 +22,59 @@ public class ClassConstructor {
 		return classTest;
 	}
 
-	public boolean validImport(String importStr) {
-		boolean importTest = false;
-		importStr = importStr.replaceAll("\\s", "");
-		if (importStr == null || importStr.length() == 0) {
-			System.out.println("not valid import String");
+	public boolean validateImport(String iString) {
+		boolean valid = false;
+		iString = iString.replaceAll("\\s", "");
+		if (iString == null || iString.length() == 0) {
+			System.out.println("validImport: not valid import");
 		} else {
-			importList.add(importStr);
-			importTest = true;
+			System.out.println("validImport: valid import");
+			importList.add(iString);
+			valid = true;
 		}
-		return importTest;
+		System.out.println("Size of import list: " + importList.size());
+		return valid;
 	}
 
-	public boolean validExtend(String extStr) {
-		boolean extendTest = false;
+	public boolean validateExtend(String extStr) {
+		boolean valid = false;
 		extStr = extStr.replaceAll("\\s", "");
 		if (extStr == null || extStr.length() == 0) {
-			System.out.println("extend string = nada");
+			System.out.println("validExtend: not valid extend");
 			extendString = "";
 		} else {
+			System.out.println("validExtend: valid extend");
 			extendString =  " extends " + extStr;
-			extendTest = true;
+			valid = true;
 		}
-		return extendTest;
+		return valid;
 	}
 
 	public boolean validImplement(String impleStr) {
-		boolean impleTest = false;
+		boolean valid = false;
 		impleStr = impleStr.replaceAll("\\s", "");
 		if (impleStr == null || impleStr.length() == 0) {
-			System.out.println("not valid implement String");
+			System.out.println("validImplement: not valid implement");
 		} else {
+			System.out.println("validImplement: valid implement");
 			implementList.add(impleStr);
-			impleTest = true;
+			valid = true;
 		}
-		return impleTest;
+		return valid;
 	}
 
 	public boolean validatePackage(String packStr) {
-		boolean packTest = false;
+		boolean valid = false;
 		packStr = packStr.replaceAll("\\s", "");
 		if (packStr == null || packStr.length() == 0) {
-			System.out.println("not a package");
+			System.out.println("validatePackage: no package added");
 			packageString = "";
 		} else {
+			System.out.println("validPackage: valid package");
 			packageString = "package " + packStr + ";\n\n";
-			packTest = true;
+			valid = true;
 		}
-		return packTest;
+		return valid;
 	}
 //~~~~~~~~~~~~~~~~~~~~~~~SET METHODS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -103,13 +108,13 @@ public class ClassConstructor {
 		}
 	}
 
-	public void setImportString(ArrayList<String> importInput) {
-		if (importInput.size() == 0 ) {
+	public void setImportString(ArrayList<String> list) {
+		
+		if (list.size() == 0 ) {
 			System.out.println("This class does not import anything.");
 			importString = "";
 		} else {
-			importString = "";
-			for (String obj : importInput) {
+			for (String obj : list) {
 				importString += "import " + obj + ";\n";
 			}
 			importString += "\n";
@@ -165,9 +170,12 @@ public class ClassConstructor {
 	}
 
 	public void createFile() {
+		System.out.println("\n");
+		System.out.println("Size of import list: " + importList.size());
 		setImportString(importList);
-		//setExtendString(extendString);
 		setImplementString(implementList);
+
+
 		if (mainBool) {
 			try {
 				PrintWriter outputFile = new PrintWriter(saveLocation + className + EXT);
