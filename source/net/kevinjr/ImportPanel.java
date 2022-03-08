@@ -29,6 +29,14 @@ public class ImportPanel extends JPanel {
 		btn.setEnabled(false);
 	}
 
+	public String sendInput() {
+		return input.getText();
+	}
+
+	public void setInput() {
+		input.setText("");
+	}
+
 	private class UpdateListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			String testImport = input.getText();
