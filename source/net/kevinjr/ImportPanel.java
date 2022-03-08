@@ -10,7 +10,7 @@ public class ImportPanel extends JPanel {
 	private JLabel label = new JLabel("Name: ");
 	private JTextField input = new JTextField(5);
 	private JButton btn = new JButton("Add");
-	public ArrayList<String> iList = new ArrayList<String>();
+	private ArrayList<String> iList = new ArrayList<String>();
 
 	/**
 	* PanelConstructor 
@@ -31,6 +31,7 @@ public class ImportPanel extends JPanel {
 		input.setText("");
 		input.setEnabled(false);
 		btn.setEnabled(false);
+		iList.clear();
 	}
 
 	public ArrayList<String> getImportList() {
@@ -39,7 +40,8 @@ public class ImportPanel extends JPanel {
 
 	private class UpdateListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if (input.getText() == "" || input.getText() == null) {
+			
+			if (input.getText().equals("") || input.getText() == null) {
 				JOptionPane.showMessageDialog(null, "Invalid Import.");
 			} else {
 				iList.add(input.getText());
