@@ -28,8 +28,6 @@ public class Gui extends JPanel {
 	private JButton savebtn = new JButton("Save");
 	private JButton clearbtn = new JButton("Clear");
 
-	private JButton aBtn = new JButton("aBtn");
-
 	/**
 	* No arg constructor that adds all panels together.
 	*/
@@ -39,10 +37,9 @@ public class Gui extends JPanel {
 		actionPanel.add(savebtn);
 		savebtn.addActionListener(new SaveListener());
 		clearbtn.addActionListener(new ClearListener());
-		aBtn.addActionListener(new AListener());
+
 		add(classPanel);
 		add(packPanel);
-		importPanel.add(aBtn);
 		add(importPanel);
 		add(extendPanel);
 		add(implementPanel);
@@ -50,20 +47,6 @@ public class Gui extends JPanel {
 		add(optionPanel);
 		add(actionPanel);
 		setBackground(Color.GRAY);
-	}
-
-	private class AListener implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			String testImport = importPanel.sendInput();
-			//~~~VALIDATE INPUT~~~~//
-			if (cc.validateImport(testImport) == false) {
-				JOptionPane.showMessageDialog(null, "Invalid Import name.");
-				importPanel.setInput();
-			} else {
-				System.out.println(testImport + " was valid.");
-				importPanel.setInput();
-			}
-		}
 	}
 
 	/**
@@ -94,6 +77,7 @@ public class Gui extends JPanel {
 
 			cc.validateExtend(extendPanel.getExtendName());
 			cc.validatePackage(packPanel.getPackageName());
+			cc.setImportString(importPanel.getImportList());
 
 			// VALIDATE CLASS NAME INPUT
 			if (cc.validateName(classPanel.getClassName()) == false) {

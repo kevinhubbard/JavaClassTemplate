@@ -3,14 +3,18 @@ package net.kevinjr;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.util.*;
 
 public class ImportPanel extends JPanel {
 	private JCheckBox box = new JCheckBox("Imports");
 	private JLabel label = new JLabel("Name: ");
 	private JTextField input = new JTextField(5);
 	private JButton btn = new JButton("Add");
-	private ClassConstructor cc = new ClassConstructor();
+	public ArrayList<String> iList = new ArrayList<String>();
 
+	/**
+	* PanelConstructor 
+	*/
 	public ImportPanel() {
 		btn.setEnabled(false);
 		input.setEnabled(false);
@@ -29,26 +33,17 @@ public class ImportPanel extends JPanel {
 		btn.setEnabled(false);
 	}
 
-	public String sendInput() {
-		return input.getText();
-	}
-
-	public void setInput() {
-		input.setText("");
+	public ArrayList<String> getImportList() {
+		return iList;
 	}
 
 	private class UpdateListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			String testImport = input.getText();
-			//~~~VALIDATE INPUT~~~~//
-			if (cc.validateImport(testImport) == false) {
-				JOptionPane.showMessageDialog(null, "Invalid Import name.");
-				input.setText("");
-				input.requestFocus();
+			if (input.getText() == "" || input.getText() == null) {
+				JOptionPane.showMessageDialog(null, "Invalid Import.");
 			} else {
-				System.out.println(testImport + " was valid.");
+				iList.add(input.getText());
 				input.setText("");
-				input.requestFocus();
 			}
 		}
 	}

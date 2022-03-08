@@ -171,8 +171,7 @@ public class ClassConstructor {
 
 	public void createFile() {
 		System.out.println("\n");
-		System.out.println("Size of import list: " + importList.size());
-		setImportString(importList);
+
 		setImplementString(implementList);
 
 
