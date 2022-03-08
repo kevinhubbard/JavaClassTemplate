@@ -5,9 +5,8 @@ import java.util.*;
 
 public class ClassConstructor {
 	final String EXT = ".java";
-	private String className, accessString, importString, extendString, implemString, packageString, constructString, saveLocation;
+	private String packageString, importString, accessString,  className, extendString, implemString, constructString, saveLocation;
 	private boolean mainBool, privateBool, constructBool, dirBool;
-	private ArrayList<String> importList = new ArrayList<String>();
 	private ArrayList<String> implementList = new ArrayList<String>();
 
 //~~~~~~~~~~~~~~~~~~~VALIDATION METHODS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -20,20 +19,6 @@ public class ClassConstructor {
 			className = classTestStr.substring(0,1).toUpperCase() + classTestStr.substring(1);
 		}
 		return classTest;
-	}
-
-	public boolean validateImport(String iString) {
-		boolean valid = false;
-		iString = iString.replaceAll("\\s", "");
-		if (iString == null || iString.length() == 0) {
-			System.out.println("validImport: not valid import");
-		} else {
-			System.out.println("validImport: valid import");
-			importList.add(iString);
-			valid = true;
-		}
-		System.out.println("Size of import list: " + importList.size());
-		return valid;
 	}
 
 	public boolean validateExtend(String extStr) {
@@ -109,10 +94,9 @@ public class ClassConstructor {
 	}
 
 	public void setImportString(ArrayList<String> list) {
-		
-		if (list.size() == 0 ) {
+		importString = "";
+		if (list.size() == 0) {
 			System.out.println("This class does not import anything.");
-			importString = "";
 		} else {
 			for (String obj : list) {
 				importString += "import " + obj + ";\n";
@@ -120,15 +104,6 @@ public class ClassConstructor {
 			importString += "\n";
 		}
 	} 
-
-/*	public void setExtendString(String extendInput) {
-		if (extendInput == null || extendInput.length() == 0) {
-			System.out.println("This class does not extend anything.");
-			extendString = "";
-		} else {
-			extendString = " extends " + extendInput;
-		}
-	}*/
 
 	public void setImplementString(ArrayList<String> implementInput) {
 		if (implementInput.size() == 0 ) {
@@ -161,7 +136,6 @@ public class ClassConstructor {
 		accessString = "";
 		constructString = "";
 		saveLocation = "";
-		importList.clear();
 		implementList.clear();
 		mainBool = false;
 		privateBool = false;
