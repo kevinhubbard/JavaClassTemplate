@@ -3,44 +3,38 @@ package net.kevinjr;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.util.*;
 
 public class ImplementPanel extends JPanel {
 	private JCheckBox box = new JCheckBox("Implements");
 	private JLabel label = new JLabel("Name: ");
 	private JTextField input = new JTextField(5);
-	private JButton btn = new JButton("Add");
-	private ClassConstructor cc = new ClassConstructor();
+	private ArrayList<String> implementList = new ArrayList<String>();
 
 	public ImplementPanel() {
-		btn.setEnabled(false);
 		input.setEnabled(false);
 		box.addActionListener(new CheckBoxListener());
-		btn.addActionListener(new UpdateListener());
 		add(box);
 		add(label);
 		add(input);
-		add(btn);
 	}
 
 	public void clearFields() {
 		box.setSelected(false);
 		input.setText("");
 		input.setEnabled(false);
-		btn.setEnabled(false);
+	}
+
+	public ArrayList<String> getImplementList() {
+		return implementList;
 	}
 
 	private class UpdateListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			String testImplement = input.getText();
-			//~~~VALIDATE INPUT~~~~//
-			if (cc.validImplement(testImplement) == false) {
-				JOptionPane.showMessageDialog(null, "Invalid Implement name.");
-				input.setText("");
-				input.requestFocus();
+			if (input.getText() == null || input.getText().length() == 0) {
+				JOptionPane.showMessageDialog(null, "Invalid Implement");
 			} else {
-				System.out.println(testImplement + " was valid.");
-				input.setText("");
-				input.requestFocus();
+				implementList.add(input.getText());
 			}
 		}
 	}
@@ -49,10 +43,8 @@ public class ImplementPanel extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			if (box.isSelected()) {
 				input.setEnabled(true);
-				btn.setEnabled(true);
 			} else {
 				input.setEnabled(false);
-				btn.setEnabled(false);
 			}
 		}
 	}

@@ -78,6 +78,7 @@ public class Gui extends JPanel {
 			cc.validateExtend(extendPanel.getExtendName());
 			cc.validatePackage(packPanel.getPackageName());
 			cc.setImportString(importPanel.getImportList());
+			cc.setImplementString(implementPanel.getImplementList());
 
 			// VALIDATE CLASS NAME INPUT
 			if (cc.validateName(classPanel.getClassName()) == false) {

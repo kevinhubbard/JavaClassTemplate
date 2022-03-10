@@ -105,14 +105,14 @@ public class ClassConstructor {
 		}
 	} 
 
-	public void setImplementString(ArrayList<String> implementInput) {
-		if (implementInput.size() == 0 ) {
+	public void setImplementString(ArrayList<String> iList) {
+		implemString = "";
+		if (iList.size() == 0 ) {
 			System.out.println("This class does not implement anything.");
-			implemString = "";
 		} else {
 			implemString = " implements ";
-			int test = implementInput.size();
-			for (String i : implementInput) {
+			int test = iList.size();
+			for (String i : iList) {
 				if (test > 1) {
 					implemString += i + ", ";
 					test--;
