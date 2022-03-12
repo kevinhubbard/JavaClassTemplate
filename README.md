@@ -3,7 +3,7 @@ Program that creates a java class file.
 Current WIP for version 2:  
 - [] Add Constructor, package and abstract class option.
 - [] Build a project directory option.
-- [] Show editable import/implement list.
+- [x] Show editable import/implement list.
 - [] Add startup popup, demonstrating how to add info.
 - [x] Updated GUI
 - [x] Save class file to a specific folder.
