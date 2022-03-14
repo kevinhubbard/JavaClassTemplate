@@ -75,10 +75,21 @@ public class Gui extends JPanel {
 	private class SaveListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 
-			cc.validateExtend(extendPanel.getExtendName());
-			cc.validatePackage(packPanel.getPackageName());
-			cc.setImportString(importPanel.getImportList());
-			cc.setImplementString(implementPanel.getImplementList());
+			if (packPanel.isSelected() == true) {
+				cc.validatePackage(packPanel.getPackageName());
+			}
+
+			if (importPanel.isSelected() == true) {
+				cc.setImportString(importPanel.getImportList());
+			}
+
+			if (extendPanel.isSelected() == true) {
+				cc.validateExtend(extendPanel.getExtendName());
+			}
+
+			if (implementPanel.isSelected() == true) {
+				cc.setImplementString(implementPanel.getImplementList());
+			}
 
 			// VALIDATE CLASS NAME INPUT
 			if (cc.validateName(classPanel.getClassName()) == false) {

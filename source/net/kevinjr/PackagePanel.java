@@ -40,6 +40,15 @@ public class PackagePanel extends JPanel {
 		return ps;
 	}
 
+	public boolean isSelected() {
+		boolean selected = false;
+
+		if (box.isSelected()) {
+			selected = true;
+		}
+		return selected;
+	}
+
 	/**
 	* The clearFields method disables panel input and sets input text
 	* to an empty string.

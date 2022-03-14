@@ -23,6 +23,15 @@ public class ImplementPanel extends JPanel {
 		add(btn);
 	}
 
+	public boolean isSelected() {
+		boolean selected = false;
+
+		if (box.isSelected()) {
+			selected = true;
+		}
+		return selected;
+	}
+
 	public void clearFields() {
 		box.setSelected(false);
 		input.setText("");
