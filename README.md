@@ -4,7 +4,7 @@ Current WIP for version 2:
 - [] Add Constructor, package and abstract class option.
 - [] Build a project directory option.
 - [x] Show editable import/implement list.
-- [x] Add startup popup, demonstrating how to add info.
+- [] Add startup popup, demonstrating how to add info.
 - [x] Updated GUI
 - [x] Save class file to a specific folder.
 - [x] Change logic for extends
