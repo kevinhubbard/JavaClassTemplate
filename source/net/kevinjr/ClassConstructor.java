@@ -5,44 +5,27 @@ import java.util.*;
 
 public class ClassConstructor {
 	final String EXT = ".java";
-	private String packageString, importString, accessString,  className, extendString, implemString, constructString, saveLocation;
+	private String packageString = "", importString = "", accessString,  className, extendString = "", implemString = "", constructString, saveLocation;
 	private boolean mainBool, privateBool, constructBool, dirBool;
 	private ArrayList<String> implementList = new ArrayList<String>();
 
 //~~~~~~~~~~~~~~~~~~~VALIDATION METHODS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 	public boolean validateName(String classTestStr) {
-		boolean classTest = false;
+		boolean valid = false;
 		classTestStr = classTestStr.replaceAll("\\s", "");
 		if (classTestStr.length() != 0) {
-			classTest = true;
+			valid = true;
 			className = classTestStr.substring(0,1).toUpperCase() + classTestStr.substring(1);
 		}
-		return classTest;
+		return valid;
 	}
 
 	public boolean validateExtend(String extStr) {
 		boolean valid = false;
 		extStr = extStr.replaceAll("\\s", "");
-		if (extStr == null || extStr.length() == 0) {
-			System.out.println("validExtend: not valid extend");
-			extendString = "";
-		} else {
-			System.out.println("validExtend: valid extend");
-			extendString =  " extends " + extStr;
-			valid = true;
-		}
-		return valid;
-	}
-
-	public boolean validImplement(String impleStr) {
-		boolean valid = false;
-		impleStr = impleStr.replaceAll("\\s", "");
-		if (impleStr == null || impleStr.length() == 0) {
-			System.out.println("validImplement: not valid implement");
-		} else {
-			System.out.println("validImplement: valid implement");
-			implementList.add(impleStr);
+		if (extStr.length() != 0) {
+			extendString = " extends " + extStr;
 			valid = true;
 		}
 		return valid;
@@ -51,11 +34,7 @@ public class ClassConstructor {
 	public boolean validatePackage(String packStr) {
 		boolean valid = false;
 		packStr = packStr.replaceAll("\\s", "");
-		if (packStr == null || packStr.length() == 0) {
-			System.out.println("validatePackage: no package added");
-			packageString = "";
-		} else {
-			System.out.println("validPackage: valid package");
+		if (packStr.length() != 0) {
 			packageString = "package " + packStr + ";\n\n";
 			valid = true;
 		}
@@ -128,8 +107,16 @@ public class ClassConstructor {
 	}
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+	public void tempSet() {
+		packageString = "";
+		importString = "";
+		extendString = "";
+		implemString = "";
+	}
+
 	private void resetFields() {
 		className = "";
+		packageString = "";
 		importString = "";
 		extendString = "";
 		implemString = "";
@@ -144,10 +131,6 @@ public class ClassConstructor {
 	}
 
 	public void createFile() {
-		System.out.println("\n");
-
-		setImplementString(implementList);
-
 
 		if (mainBool) {
 			try {
