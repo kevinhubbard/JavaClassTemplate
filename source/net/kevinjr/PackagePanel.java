@@ -31,13 +31,13 @@ public class PackagePanel extends JPanel {
 	}
 
 	public String getPackageName() {
-		String ps = "";
+		String packageString = "";
 		if (box.isSelected()) {
-			ps = input.getText();
+			packageString = input.getText();
 		} else {
-			ps = "";
+			packageString = "";
 		}
-		return ps;
+		return packageString;
 	}
 
 	public boolean isSelected() {

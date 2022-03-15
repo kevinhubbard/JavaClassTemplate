@@ -130,7 +130,21 @@ public class ClassConstructor {
 		dirBool = false;
 	}
 
+	public boolean checkFile() {
+		boolean exists = false;
+		File f = new File(saveLocation+className+EXT);
+		if (f.exists()) {
+			System.out.println("File already Exists.");
+			exists = true;
+		} else {
+			System.out.println("File DOes NOT EXIST.");
+		}
+
+		return exists;
+	}
+
 	public void createFile() {
+
 
 		if (mainBool) {
 			try {

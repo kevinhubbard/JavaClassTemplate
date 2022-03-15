@@ -106,8 +106,33 @@ public class Gui extends JPanel {
 					File saveLoc = file.getSelectedFile();
 					String locationString = saveLoc.getAbsolutePath();
 					cc.setSaveLocation(locationString);
-					cc.setupBools(optionPanel.returnMain(), optionPanel.returnPriv(), optionPanel.returnCons(), optionPanel.returnDir());
-					cc.createFile();
+
+					if (cc.checkFile() == false) {
+						cc.setupBools(optionPanel.returnMain(), optionPanel.returnPriv(), optionPanel.returnCons(), optionPanel.returnDir());
+						cc.createFile();
+						// ASK USER IF THEY WANT TO ADD ANOTHER CLASS OR QUIT
+						int option = JOptionPane.showConfirmDialog(null, "File successfully created!\nAdd another class?", "Create a Class", JOptionPane.YES_NO_OPTION);
+						if (option != 0) {
+							System.exit(0);
+						}
+
+					} else {
+						int exts = JOptionPane.showConfirmDialog(null, "File already exists.\nOverwrite?", "Overwrite", JOptionPane.YES_NO_OPTION);
+						if (exts == 0) {
+							cc.setupBools(optionPanel.returnMain(), optionPanel.returnPriv(), optionPanel.returnCons(), optionPanel.returnDir());
+							cc.createFile();
+							// ASK USER IF THEY WANT TO ADD ANOTHER CLASS OR QUIT
+						int option = JOptionPane.showConfirmDialog(null, "File successfully created!\nAdd another class?", "Create a Class", JOptionPane.YES_NO_OPTION);
+						if (option != 0) {
+							System.exit(0);
+						}
+
+						} else {
+							JOptionPane.showMessageDialog(null, "Save aborted.");
+						}
+					}
+
+
 
 					// CLEAR USER INPUT
 					classPanel.clearFields();
@@ -117,11 +142,6 @@ public class Gui extends JPanel {
 					implementPanel.clearFields();
 					optionPanel.clearFields();
 
-					// ASK USER IF THEY WANT TO ADD ANOTHER CLASS OR QUIT
-					int option = JOptionPane.showConfirmDialog(null, "File successfully created!\nAdd another class?", "Create a Class", JOptionPane.YES_NO_OPTION);
-					if (option != 0) {
-						System.exit(0);
-					}
 				} else {
 					System.out.println("Save canceled.");
 				}
