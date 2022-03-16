@@ -20,7 +20,7 @@ public class Gui extends JPanel {
 	private ImportPanel importPanel = new ImportPanel();
 	private ExtendPanel extendPanel = new ExtendPanel();
 	private ImplementPanel implementPanel = new ImplementPanel();
-	private ImportListPanel importListPanel = new ImportListPanel();
+	//private ImportListPanel importListPanel = new ImportListPanel();
 	private OptionPanel optionPanel = new OptionPanel();
 	private JPanel actionPanel = new JPanel();
 	private ClassConstructor cc = new ClassConstructor();
@@ -43,7 +43,7 @@ public class Gui extends JPanel {
 		add(importPanel);
 		add(extendPanel);
 		add(implementPanel);
-		add(importListPanel);
+		//add(importListPanel);
 		add(optionPanel);
 		add(actionPanel);
 		setBackground(Color.GRAY);
@@ -73,6 +73,16 @@ public class Gui extends JPanel {
 	* user if they would like to create another file.
 	*/
 	private class SaveListener implements ActionListener {
+		private void save() {
+			cc.setupBools(optionPanel.returnMain(), optionPanel.returnPriv(), optionPanel.returnCons(), optionPanel.returnDir());
+			cc.createFile();
+			// ASK USER IF THEY WANT TO ADD ANOTHER CLASS OR QUIT
+			int quitOption = JOptionPane.showConfirmDialog(null, "File successfully created!\nAdd another class?", "Create a Class", JOptionPane.YES_NO_OPTION);
+			if (quitOption != 0) {
+				System.exit(0);
+			}
+		}
+
 		public void actionPerformed(ActionEvent e) {
 
 			if (packPanel.isSelected() == true) {
@@ -82,7 +92,7 @@ public class Gui extends JPanel {
 			if (importPanel.isSelected() == true) {
 				cc.setImportString(importPanel.getImportList());
 			}
-
+ 
 			if (extendPanel.isSelected() == true) {
 				cc.validateExtend(extendPanel.getExtendName());
 			}
@@ -107,32 +117,16 @@ public class Gui extends JPanel {
 					String locationString = saveLoc.getAbsolutePath();
 					cc.setSaveLocation(locationString);
 
-					if (cc.checkFile() == false) {
-						cc.setupBools(optionPanel.returnMain(), optionPanel.returnPriv(), optionPanel.returnCons(), optionPanel.returnDir());
-						cc.createFile();
-						// ASK USER IF THEY WANT TO ADD ANOTHER CLASS OR QUIT
-						int option = JOptionPane.showConfirmDialog(null, "File successfully created!\nAdd another class?", "Create a Class", JOptionPane.YES_NO_OPTION);
-						if (option != 0) {
-							System.exit(0);
-						}
-
+					if (!cc.fileExists()) {
+						save();
 					} else {
-						int exts = JOptionPane.showConfirmDialog(null, "File already exists.\nOverwrite?", "Overwrite", JOptionPane.YES_NO_OPTION);
-						if (exts == 0) {
-							cc.setupBools(optionPanel.returnMain(), optionPanel.returnPriv(), optionPanel.returnCons(), optionPanel.returnDir());
-							cc.createFile();
-							// ASK USER IF THEY WANT TO ADD ANOTHER CLASS OR QUIT
-						int option = JOptionPane.showConfirmDialog(null, "File successfully created!\nAdd another class?", "Create a Class", JOptionPane.YES_NO_OPTION);
-						if (option != 0) {
-							System.exit(0);
-						}
-
+						int overwriteOption = JOptionPane.showConfirmDialog(null, "File already exists.\nOverwrite?", "Overwrite", JOptionPane.YES_NO_OPTION);
+						if (overwriteOption == 0) {
+							save();
 						} else {
 							JOptionPane.showMessageDialog(null, "Save aborted.");
 						}
 					}
-
-
 
 					// CLEAR USER INPUT
 					classPanel.clearFields();

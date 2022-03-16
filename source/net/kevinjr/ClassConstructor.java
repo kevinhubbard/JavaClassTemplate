@@ -130,7 +130,7 @@ public class ClassConstructor {
 		dirBool = false;
 	}
 
-	public boolean checkFile() {
+	public boolean fileExists() {
 		boolean exists = false;
 		File f = new File(saveLocation+className+EXT);
 		if (f.exists()) {
