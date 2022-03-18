@@ -20,7 +20,6 @@ public class Gui extends JPanel {
 	private ImportPanel importPanel = new ImportPanel();
 	private ExtendPanel extendPanel = new ExtendPanel();
 	private ImplementPanel implementPanel = new ImplementPanel();
-	//private ImportListPanel importListPanel = new ImportListPanel();
 	private OptionPanel optionPanel = new OptionPanel();
 	private JPanel actionPanel = new JPanel();
 	private ClassConstructor cc = new ClassConstructor();
@@ -43,7 +42,6 @@ public class Gui extends JPanel {
 		add(importPanel);
 		add(extendPanel);
 		add(implementPanel);
-		//add(importListPanel);
 		add(optionPanel);
 		add(actionPanel);
 		setBackground(Color.GRAY);

@@ -12,10 +12,17 @@ public class ImportPanel extends JPanel {
 	private JButton btn = new JButton("Add");
 	private ArrayList<String> iList = new ArrayList<String>();
 
+	
+	//private JPanel listPanel = new JPanel();
+	private DefaultListModel listModel = new DefaultListModel();
+	private ListPanel lp = new ListPanel();
+	private JList jList;
+
 	/**
 	* PanelConstructor 
 	*/
 	public ImportPanel() {
+		setPreferredSize(new Dimension(300,100));
 		btn.setEnabled(false);
 		input.setEnabled(false);
 		box.addActionListener(new CheckBoxListener());
@@ -24,6 +31,7 @@ public class ImportPanel extends JPanel {
 		add(label);
 		add(input);
 		add(btn);
+		add(lp);
 	}
 
 	public boolean isSelected() {
@@ -47,6 +55,15 @@ public class ImportPanel extends JPanel {
 		return iList;
 	}
 
+	private class ListPanel extends JPanel {
+		public ListPanel() {
+			setSize(250,100);
+			jList = new JList(listModel);
+			jList.setFixedCellWidth(25);
+			add(jList);
+		}
+	}
+
 	private class UpdateListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			
@@ -54,7 +71,9 @@ public class ImportPanel extends JPanel {
 				JOptionPane.showMessageDialog(null, "Invalid Import.");
 			} else {
 				iList.add(input.getText());
+				listModel.addElement(input.getText());
 				input.setText("");
+				lp.repaint();
 			}
 		}
 	}
