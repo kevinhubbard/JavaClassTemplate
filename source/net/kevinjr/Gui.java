@@ -55,7 +55,7 @@ public class Gui extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			classPanel.clearFields();
 			packPanel.clearFields();
-			importPanel.clearFields();
+			//importPanel.clearFields();
 			extendPanel.clearFields();
 			implementPanel.clearFields();
 			optionPanel.clearFields();
@@ -87,9 +87,9 @@ public class Gui extends JPanel {
 				cc.validatePackage(packPanel.getPackageName());
 			}
 
-			if (importPanel.isSelected() == true) {
+/*			if (importPanel.isSelected() == true) {
 				cc.setImportString(importPanel.getImportList());
-			}
+			}*/
  
 			if (extendPanel.isSelected() == true) {
 				cc.validateExtend(extendPanel.getExtendName());
@@ -129,7 +129,7 @@ public class Gui extends JPanel {
 					// CLEAR USER INPUT
 					classPanel.clearFields();
 					packPanel.clearFields();
-					importPanel.clearFields();
+					//importPanel.clearFields();
 					extendPanel.clearFields();
 					implementPanel.clearFields();
 					optionPanel.clearFields();
