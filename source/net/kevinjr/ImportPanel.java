@@ -101,8 +101,8 @@ public class ImportPanel extends JPanel {
 			jList = new JList(listModel);
 			removeBtn.addActionListener(new RemoveListener());
 			JScrollPane sp = new JScrollPane(jList);
-			sp.setMaximumSize(new Dimension(350,75));
-			//jList.setFixedCellWidth(200);
+			//sp.setMaximumSize(new Dimension(350,75));
+			jList.setFixedCellWidth(200);
 			add(sp);
 			add(removeBtn);
 		}
