@@ -97,11 +97,12 @@ public class ImportPanel extends JPanel {
 
 	private class ListPanel extends JPanel {
 		private JButton removeBtn = new JButton("Remove");
-				private Color c = new Color(98,69,42);
+		private Color c = new Color(98,69,42);
 		private JPanel shit = new JPanel();
 
 		public ListPanel() {
-			setBackground(c);
+
+			//setBackground(c);
 			shit.setPreferredSize(new Dimension(250,75));
 			setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 			jList = new JList(listModel);
@@ -109,8 +110,10 @@ public class ImportPanel extends JPanel {
 			JScrollPane sp = new JScrollPane(jList);
 			//sp.setPreferredSize(new Dimension(250,75));
 			//jList.setFixedCellWidth(20);
+
 			shit.add(sp);
 			add(shit);
+			add(Box.createRigidArea(new Dimension(10,10)));
 			add(removeBtn);
 		}
 
