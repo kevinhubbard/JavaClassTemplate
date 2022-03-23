@@ -102,14 +102,11 @@ public class ImportPanel extends JPanel {
 
 		public ListPanel() {
 
-			//setBackground(c);
 			shit.setPreferredSize(new Dimension(250,75));
 			setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 			jList = new JList(listModel);
 			removeBtn.addActionListener(new RemoveListener());
 			JScrollPane sp = new JScrollPane(jList);
-			//sp.setPreferredSize(new Dimension(250,75));
-			//jList.setFixedCellWidth(20);
 
 			shit.add(sp);
 			add(shit);
