@@ -10,7 +10,7 @@ public class ImportPanel extends JPanel {
 	private ArrayList<String> iList = new ArrayList<String>();
 	private DefaultListModel listModel = new DefaultListModel();
 	private JList jList;
-
+private JButton removeBtn = new JButton("Remove");
 	private InputPanel ip = new InputPanel();
 	private ListPanel lp = new ListPanel();
 
@@ -87,16 +87,20 @@ public class ImportPanel extends JPanel {
 				if (box.isSelected()) {
 					input.setEnabled(true);
 					btn.setEnabled(true);
+					removeBtn.setEnabled(true);
+					jList.setEnabled(true);
 				} else {
 					input.setEnabled(false);
 					btn.setEnabled(false);
+					removeBtn.setEnabled(false);
+					jList.setEnabled(false);
 				}
 			}
 		}
 	}
 
 	private class ListPanel extends JPanel {
-		private JButton removeBtn = new JButton("Remove");
+		
 		private Color c = new Color(98,69,42);
 		private JPanel shit = new JPanel();
 
@@ -116,7 +120,8 @@ public class ImportPanel extends JPanel {
 
 		private class RemoveListener implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Something happened");
+				String selected = jList.getSelectedValue().toString();
+				System.out.println(selected);
 			}
 		}
 	}
