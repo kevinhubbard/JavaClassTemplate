@@ -101,19 +101,18 @@ private JButton removeBtn = new JButton("Remove");
 
 	private class ListPanel extends JPanel {
 		
-		private Color c = new Color(98,69,42);
-		private JPanel shit = new JPanel();
+		private JPanel innerPanel = new JPanel();
 
 		public ListPanel() {
 
-			shit.setPreferredSize(new Dimension(250,75));
+			innerPanel.setPreferredSize(new Dimension(250,75));
 			setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 			jList = new JList(listModel);
 			removeBtn.addActionListener(new RemoveListener());
 			JScrollPane sp = new JScrollPane(jList);
 
-			shit.add(sp);
-			add(shit);
+			innerPanel.add(sp);
+			add(innerPanel);
 			add(Box.createRigidArea(new Dimension(10,10)));
 			add(removeBtn);
 		}
