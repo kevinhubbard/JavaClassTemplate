@@ -28,4 +28,3 @@ Go to classes directory.
 ```
 jar -cvmf manifest.mf "Class Constructor".jar net ../images/ccLogo.png
 ``` 
-If no errors a JAR file will be created in the classes directory.
