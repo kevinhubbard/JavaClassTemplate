@@ -24,7 +24,7 @@ public class Gui extends JPanel {
 	private JPanel actionPanel = new JPanel();
 	private ClassConstructor cc = new ClassConstructor();
 
-	private ImportPanel.InputPanel ipip = importPanel.new InputPanel();
+	//private ImportPanel.InputPanel ipip = importPanel.new InputPanel();
 
 	private JButton savebtn = new JButton("Save");
 	private JButton clearbtn = new JButton("Clear");
