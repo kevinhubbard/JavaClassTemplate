@@ -10,7 +10,7 @@ public class ImportPanel extends JPanel {
 	private ArrayList<String> iList = new ArrayList<String>();
 	private DefaultListModel listModel = new DefaultListModel();
 	private JList jList;
-private JButton removeBtn = new JButton("Remove");
+	private JButton removeBtn = new JButton("Remove");
 	private InputPanel ip = new InputPanel();
 	private ListPanel lp = new ListPanel();
 
