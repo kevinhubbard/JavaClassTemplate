@@ -24,8 +24,6 @@ public class Gui extends JPanel {
 	private JPanel actionPanel = new JPanel();
 	private ClassConstructor cc = new ClassConstructor();
 
-	//private ImportPanel.InputPanel ipip = importPanel.new InputPanel();
-
 	private JButton savebtn = new JButton("Save");
 	private JButton clearbtn = new JButton("Clear");
 
@@ -59,7 +57,7 @@ public class Gui extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			classPanel.clearFields();
 			packPanel.clearFields();
-			ipip.clearFields();
+			importPanel.clearFields();
 			extendPanel.clearFields();
 			implementPanel.clearFields();
 			optionPanel.clearFields();
@@ -91,7 +89,7 @@ public class Gui extends JPanel {
 				cc.validatePackage(packPanel.getPackageName());
 			}
 
-			if (ipip.isSelected() == true) {
+			if (importPanel.isSelected() == true) {
 				cc.setImportString(importPanel.getImportList());
 			}
  
@@ -133,7 +131,7 @@ public class Gui extends JPanel {
 					// CLEAR USER INPUT
 					classPanel.clearFields();
 					packPanel.clearFields();
-					ipip.clearFields();
+					importPanel.clearFields();
 					extendPanel.clearFields();
 					implementPanel.clearFields();
 					optionPanel.clearFields();
