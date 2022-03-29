@@ -5,15 +5,15 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class ExtendPanel extends JPanel {
-	private JCheckBox box = new JCheckBox("Extends");
-	private JLabel label = new JLabel("Name: ");
+	private JCheckBox box = new JCheckBox("Extends:");
+	//private JLabel label = new JLabel("Name: ");
 	private JTextField input = new JTextField(10);
 
 	public ExtendPanel() {
 		input.setEnabled(false);
 		box.addActionListener(new CheckBoxListener());
 		add(box);
-		add(label);
+		//add(label);
 		add(input);
 	}
 

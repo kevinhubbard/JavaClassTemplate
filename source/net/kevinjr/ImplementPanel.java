@@ -6,21 +6,23 @@ import javax.swing.*;
 import java.util.*;
 
 public class ImplementPanel extends JPanel {
-	private JCheckBox box = new JCheckBox("Implements");
-	private JLabel label = new JLabel("Name: ");
-	private JTextField input = new JTextField(5);
+	private JCheckBox box = new JCheckBox("Implements:");
+	private JTextField input = new JTextField(8);
 	private JButton btn = new JButton("Add");
+	private JButton rmv = new JButton("Remove");
 	private ArrayList<String> implementList = new ArrayList<String>();
+	private DefaultListModel iListModel = new DefaultListModel();
+	private JList jList;
+	private JPanel iop = new JPanel();
+	private JPanel ilp = new JPanel();
 
+	/**
+	* Constructor
+	*/
 	public ImplementPanel() {
-		btn.setEnabled(false);
-		input.setEnabled(false);
-		box.addActionListener(new CheckBoxListener());
-		btn.addActionListener(new AddListener());
-		add(box);
-		add(label);
-		add(input);
-		add(btn);
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		add(createOptionPanel());
+		add(createListPanel());
 	}
 
 	public boolean isSelected() {
@@ -37,11 +39,37 @@ public class ImplementPanel extends JPanel {
 		input.setText("");
 		input.setEnabled(false);
 		btn.setEnabled(false);
+		iListModel.clear();
 		implementList.clear();
 	}
 
 	public ArrayList<String> getImplementList() {
+		for (int i = 0; i < iListModel.size(); i++) {
+			implementList.add(iListModel.get(i).toString());
+		}
 		return implementList;
+	}
+
+	private JPanel createOptionPanel() {
+		btn.setEnabled(false);
+		input.setEnabled(false);
+		box.addActionListener(new CheckBoxListener());
+		btn.addActionListener(new AddListener());
+		iop.add(box);
+		iop.add(input);
+		iop.add(btn);
+		return iop;
+	}
+
+	private JPanel createListPanel() {
+		rmv.setEnabled(false);
+		jList = new JList(iListModel);
+		JScrollPane sp = new JScrollPane(jList);
+		sp.setPreferredSize(new Dimension(150, 50));
+		rmv.addActionListener(new RemoveListener());
+		ilp.add(sp);
+		ilp.add(rmv);
+		return ilp;
 	}
 
 	private class AddListener implements ActionListener {
@@ -49,8 +77,9 @@ public class ImplementPanel extends JPanel {
 			if (input.getText() == null || input.getText().length() == 0) {
 				JOptionPane.showMessageDialog(null, "Invalid Implement");
 			} else {
-				implementList.add(input.getText());
+				iListModel.addElement(input.getText());
 				input.setText("");
+				ilp.repaint();
 			}
 		}
 	}
@@ -60,10 +89,24 @@ public class ImplementPanel extends JPanel {
 			if (box.isSelected()) {
 				input.setEnabled(true);
 				btn.setEnabled(true);
+				rmv.setEnabled(true);
 			} else {
 				input.setEnabled(false);
 				btn.setEnabled(false);
+				rmv.setEnabled(false);
 			}
+		}
+	}
+
+	private class RemoveListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			int index = jList.getSelectedIndex();
+			String impStr = "Remove " + iListModel.get(index) + " from list?";
+			int res = JOptionPane.showConfirmDialog(null, impStr, "Confirm?", JOptionPane.YES_NO_OPTION);
+			if (res == 0) {
+				iListModel.remove(index);
+			}
+			ilp.repaint();
 		}
 	}
 }

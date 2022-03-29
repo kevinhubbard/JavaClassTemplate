@@ -14,8 +14,8 @@ import javax.swing.*;
 */
 
 public class PackagePanel extends JPanel {
-	private JCheckBox box = new JCheckBox("Package");
-	private JLabel label = new JLabel("Name: ");
+	private JCheckBox box = new JCheckBox("Package:");
+	//private JLabel label = new JLabel("Name: ");
 	private JTextField input = new JTextField(10);
 
 	/**
@@ -26,7 +26,7 @@ public class PackagePanel extends JPanel {
 		input.setEnabled(false);
 		box.addActionListener(new CheckBoxListener());
 		add(box);
-		add(label);
+		//add(label);
 		add(input);
 	}
 
