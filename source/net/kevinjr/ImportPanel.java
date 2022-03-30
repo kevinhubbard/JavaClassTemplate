@@ -41,7 +41,7 @@ public class ImportPanel extends JPanel {
 		rmv.setEnabled(false);
 		jList = new JList(listModel);
 		JScrollPane sp = new JScrollPane(jList);
-		sp.setPreferredSize(new Dimension(150,50));
+		sp.setPreferredSize(new Dimension(150,75));
 		rmv.addActionListener(new RemoveListener());
 		ilp.add(sp);
 		ilp.add(rmv);
