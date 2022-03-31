@@ -28,17 +28,17 @@ public class Gui extends JPanel {
 	private JButton clearbtn = new JButton("Clear");
 
 
-
 	/**
 	* No arg constructor that adds all panels together.
 	*/
 	public Gui() {
+		
 		actionPanel.setPreferredSize(new Dimension(250, 40));
 		actionPanel.add(clearbtn);
 		actionPanel.add(savebtn);
 		savebtn.addActionListener(new SaveListener());
 		clearbtn.addActionListener(new ClearListener());
-
+		
 		add(classPanel);
 		add(packPanel);
 		add(importPanel);

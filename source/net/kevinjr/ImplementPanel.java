@@ -65,7 +65,7 @@ public class ImplementPanel extends JPanel {
 		rmv.setEnabled(false);
 		jList = new JList(iListModel);
 		JScrollPane sp = new JScrollPane(jList);
-		sp.setPreferredSize(new Dimension(150, 50));
+		sp.setPreferredSize(new Dimension(150, 57));
 		rmv.addActionListener(new RemoveListener());
 		ilp.add(sp);
 		ilp.add(rmv);
