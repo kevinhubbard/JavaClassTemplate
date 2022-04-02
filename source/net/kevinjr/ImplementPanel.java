@@ -5,6 +5,15 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.util.*;
 
+/**
+* This program takes user input and creates the framework of a java file.
+* 
+* @author Kevin H
+* @version 1.0.1
+* @since 2022-01-16
+*/
+
+
 public class ImplementPanel extends JPanel {
 	private JCheckBox box = new JCheckBox("Implements:");
 	private JTextField input = new JTextField(8);

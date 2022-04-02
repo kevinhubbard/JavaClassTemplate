@@ -4,6 +4,15 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+/**
+* This program takes user input and creates the framework of a java file.
+* 
+* @author Kevin H
+* @version 1.0.1
+* @since 2022-01-16
+*/
+
+
 public class OptionPanel extends JPanel {
 
 	private JCheckBox privBox = new JCheckBox("Private");	
