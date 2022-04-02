@@ -42,7 +42,6 @@ public class Main extends JFrame {
 	}
 	
 	public static void main(String[] args) {
-		//launch program
 		new Main().createFrame();
 	}
 }
