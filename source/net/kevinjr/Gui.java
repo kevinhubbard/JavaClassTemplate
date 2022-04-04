@@ -76,11 +76,6 @@ public class Gui extends JPanel {
 		private void save() {
 			cc.setupBools(optionPanel.returnMain(), optionPanel.returnPriv(), optionPanel.returnCons(), optionPanel.returnDir());
 			cc.createFile();
-			// ASK USER IF THEY WANT TO ADD ANOTHER CLASS OR QUIT
-			int quitOption = JOptionPane.showConfirmDialog(null, "File successfully created!\nAdd another class?", "Create a Class", JOptionPane.YES_NO_OPTION);
-			if (quitOption != 0) {
-				System.exit(0);
-			}
 		}
 
 		public void actionPerformed(ActionEvent e) {
@@ -135,9 +130,6 @@ public class Gui extends JPanel {
 					extendPanel.clearFields();
 					implementPanel.clearFields();
 					optionPanel.clearFields();
-
-				} else {
-					System.out.println("Save canceled.");
 				}
 			}
 		}
