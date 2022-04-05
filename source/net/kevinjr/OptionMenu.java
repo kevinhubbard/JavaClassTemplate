@@ -3,6 +3,14 @@ package net.kevinjr;
 import javax.swing.*;
 import java.awt.event.*;
 
+/**
+* This class creates a menu for a jFrame.
+* 
+* @author Kevin H
+* @version 1.0.1
+* @since 2022-01-16
+*/
+
 public class OptionMenu extends JMenuBar {
 
 	public OptionMenu() {
