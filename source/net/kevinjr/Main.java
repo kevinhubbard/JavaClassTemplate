@@ -16,10 +16,7 @@ public class Main extends JFrame {
 	* This method creates a new JFrame and gives it some default settings.
 	*/
 
-
 	public void createFrame() {
-		
-
 		setTitle("Create A Class");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(330, 510);
