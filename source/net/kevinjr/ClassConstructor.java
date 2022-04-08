@@ -18,8 +18,6 @@ public class ClassConstructor {
 	private boolean mainBool, privateBool, constructBool, dirBool;
 	private ArrayList<String> implementList = new ArrayList<String>();
 
-//~~~~~~~~~~~~~~~~~~~VALIDATION METHODS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 	public boolean validateName(String classTestStr) {
 		boolean valid = false;
 		classTestStr = classTestStr.replaceAll("\\s", "");
@@ -49,7 +47,6 @@ public class ClassConstructor {
 		}
 		return valid;
 	}
-//~~~~~~~~~~~~~~~~~~~~~~~SET METHODS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 	public void setupBools(boolean mb, boolean pb, boolean cb, boolean dir) {
 		// CHECK FOR MAIN CLASS
@@ -114,7 +111,6 @@ public class ClassConstructor {
 	public void setSaveLocation(String l) {
 		saveLocation = l + "/";
 	}
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 	public void tempSet() {
 		packageString = "";
@@ -153,8 +149,6 @@ public class ClassConstructor {
 	}
 
 	public void createFile() {
-
-
 		if (mainBool) {
 			try {
 				PrintWriter outputFile = new PrintWriter(saveLocation + className + EXT);
