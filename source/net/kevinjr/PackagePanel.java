@@ -34,8 +34,6 @@ public class PackagePanel extends JPanel {
 		String packageString = "";
 		if (box.isSelected()) {
 			packageString = input.getText();
-		} else {
-			packageString = "";
 		}
 		return packageString;
 	}

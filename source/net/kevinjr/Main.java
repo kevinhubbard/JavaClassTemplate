@@ -19,7 +19,7 @@ public class Main extends JFrame {
 	public void createFrame() {
 		setTitle("Create A Class");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(330, 510);
+		setSize(1000, 1000);
 		setResizable(false);
 		setJMenuBar(new OptionMenu());
 		getContentPane().add(BorderLayout.CENTER, new Gui());

@@ -115,8 +115,10 @@ public class ImportPanel extends JPanel {
 			int n = JOptionPane.showConfirmDialog(null, msg, "Confirm?", JOptionPane.YES_NO_OPTION);
 			if (n == 0) {
 				listModel.removeElementAt(rmvSel);
+				iList.remove(rmvSel);
 				ilp.repaint();
 			}
+			System.out.println(iList.size());
 		}
 	}
 }

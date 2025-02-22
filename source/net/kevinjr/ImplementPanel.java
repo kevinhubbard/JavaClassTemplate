@@ -114,6 +114,7 @@ public class ImplementPanel extends JPanel {
 			int res = JOptionPane.showConfirmDialog(null, impStr, "Confirm?", JOptionPane.YES_NO_OPTION);
 			if (res == 0) {
 				iListModel.remove(index);
+				implementList.remove(index);
 			}
 			ilp.repaint();
 		}

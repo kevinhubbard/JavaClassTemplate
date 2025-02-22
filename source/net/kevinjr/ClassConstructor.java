@@ -14,9 +14,21 @@ import java.util.*;
 
 public class ClassConstructor {
 	final String EXT = ".java";
-	private String packageString = "", importString = "", accessString,  className, extendString = "", implemString = "", constructString, saveLocation;
+	private String packageString = "", importString = "", accessString,  className, extendString = "", implemString = "", constructString, saveLocation, tempStr = "";;
 	private boolean mainBool, privateBool, constructBool, dirBool;
 	private ArrayList<String> implementList = new ArrayList<String>();
+
+	public String getImportString() {
+		return importString;
+	}
+
+	public String getAccessString() {
+		return accessString;
+	}
+
+	public void setClassName(String name) {
+		this.className = name.substring(0,1).toUpperCase() + name.substring(1);
+	}
 
 	public boolean validateName(String classTestStr) {
 		boolean valid = false;
@@ -34,6 +46,8 @@ public class ClassConstructor {
 		if (extStr.length() != 0) {
 			extendString = " extends " + extStr;
 			valid = true;
+		} else {
+			extendString = "";
 		}
 		return valid;
 	}
@@ -44,6 +58,8 @@ public class ClassConstructor {
 		if (packStr.length() != 0) {
 			packageString = "package " + packStr + ";\n\n";
 			valid = true;
+		} else {
+			packageString = "";
 		}
 		return valid;
 	}
@@ -65,7 +81,8 @@ public class ClassConstructor {
 
 		// CHECK FOR CONSTRUCTOR CLASS
 		if (cb == true) {
-			constructString = "\n\t//Constructor\n\tpublic " + className + "() {\n\t\n\t}";
+			String header = className.substring(0,1).toUpperCase() + className.substring(1);
+			constructString = "\n\t//Constructor\n\tpublic " + header + "() {\n\t\n\t}";
 		} else {
 			constructString = "";
 		}
@@ -112,12 +129,12 @@ public class ClassConstructor {
 		saveLocation = l + "/";
 	}
 
-	public void tempSet() {
+/*	public void tempSet() {
 		packageString = "";
 		importString = "";
 		extendString = "";
 		implemString = "";
-	}
+	}*/
 
 	private void resetFields() {
 		className = "";
@@ -170,5 +187,22 @@ public class ClassConstructor {
 			System.out.println("not a main class");
 		}
 		resetFields();
+	}
+
+	public String generateTempFile() {
+		tempStr = "";
+		if (mainBool) {
+			tempStr += packageString;
+			tempStr += importString;
+			tempStr += accessString + " class " + className + extendString + implemString + " {\n\t" + constructString;
+			tempStr += "\n\tpublic static void main(String[] args) {\n\t\t\n\t}\n}";
+		} else {
+			tempStr += packageString;
+			tempStr += importString;
+			tempStr += accessString + " class " + className + extendString + implemString + " {\n\t" + constructString + "\n}";
+		}
+		importString = "";
+		implementList = null;
+		return tempStr;
 	}
 }

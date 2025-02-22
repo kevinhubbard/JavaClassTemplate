@@ -24,8 +24,13 @@ public class Gui extends JPanel {
 	private JPanel actionPanel = new JPanel();
 	private ClassConstructor cc = new ClassConstructor();
 
+	private TextUI tpan = new TextUI();
+	//private JTextField inp = new JTextField(10);
+
 	private JButton savebtn = new JButton("Save");
 	private JButton clearbtn = new JButton("Clear");
+
+	private JButton generatePreviewBtn = new JButton("Generate");
 
 
 	/**
@@ -34,10 +39,14 @@ public class Gui extends JPanel {
 	public Gui() {
 		
 		actionPanel.setPreferredSize(new Dimension(250, 40));
-		actionPanel.add(clearbtn);
+		//actionPanel.add(clearbtn);
 		actionPanel.add(savebtn);
+
+		actionPanel.add(generatePreviewBtn);
+
 		savebtn.addActionListener(new SaveListener());
 		clearbtn.addActionListener(new ClearListener());
+		generatePreviewBtn.addActionListener(new GenerateListener());
 		
 		add(classPanel);
 		add(packPanel);
@@ -45,6 +54,8 @@ public class Gui extends JPanel {
 		add(extendPanel);
 		add(implementPanel);
 		add(optionPanel);
+		//add(tpan);
+		//add(inp);
 		add(actionPanel);
 		setBackground(Color.GRAY);
 	}
@@ -74,8 +85,9 @@ public class Gui extends JPanel {
 	*/
 	private class SaveListener implements ActionListener {
 		private void save() {
-			cc.setupBools(optionPanel.returnMain(), optionPanel.returnPriv(), optionPanel.returnCons(), optionPanel.returnDir());
-			cc.createFile();
+			//cc.setupBools(optionPanel.returnMain(), optionPanel.returnPriv(), optionPanel.returnCons(), optionPanel.returnDir());
+			//cc.createFile();
+			//GET TXT FROM TEXT PANEL AND SAVE
 		}
 
 		public void actionPerformed(ActionEvent e) {
@@ -132,6 +144,39 @@ public class Gui extends JPanel {
 					optionPanel.clearFields();
 				}
 			}
+		}
+	}
+	private class GenerateListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			cc.setClassName(classPanel.getClassName());
+			if (packPanel.isSelected() == true) {
+				cc.validatePackage(packPanel.getPackageName());
+			} else {
+				cc.validatePackage("");
+			}
+
+			if (importPanel.isSelected() == true) {
+				cc.setImportString(importPanel.getImportList());
+			}
+	 
+			if (extendPanel.isSelected() == true) {
+				cc.validateExtend(extendPanel.getExtendName());
+			} else {
+				cc.validateExtend("");
+			}
+
+			if (implementPanel.isSelected() == true) {
+				cc.setImplementString(implementPanel.getImplementList());
+			}
+
+			cc.setupBools(optionPanel.returnMain(), optionPanel.returnPriv(), optionPanel.returnCons(), optionPanel.returnDir());
+			
+			String strOfData = cc.generateTempFile();
+			remove(tpan);
+			tpan = 	new TextUI(strOfData);
+			add(tpan);
+			revalidate();
+			repaint();		
 		}
 	}
 }
