@@ -1,22 +1,20 @@
+/**
+* This program takes user input and creates the framework of a java file.
+* 
+* @author Kevin H
+* @version 1.0.2
+* @since 2022-02-22
+*/
+
 package net.kevinjr;
 
 import java.io.*;
 import java.util.*;
 
-/**
-* This program takes user input and creates the framework of a java file.
-* 
-* @author Kevin H
-* @version 1.0.1
-* @since 2022-01-16
-*/
-
-
 public class ClassConstructor {
 	final String EXT = ".java";
 	private String packageString = "", importString = "", accessString,  className, extendString = "", implemString = "", constructString, saveLocation, tempStr = "";;
 	private boolean mainBool, privateBool, constructBool, dirBool;
-	private ArrayList<String> implementList = new ArrayList<String>();
 
 	public String getImportString() {
 		return importString;
@@ -82,7 +80,7 @@ public class ClassConstructor {
 		// CHECK FOR CONSTRUCTOR CLASS
 		if (cb == true) {
 			String header = className.substring(0,1).toUpperCase() + className.substring(1);
-			constructString = "\n\t//Constructor\n\tpublic " + header + "() {\n\t\n\t}";
+			constructString = "\n\t//Constructor method\n\tpublic " + header + "() {\n\t\n\t}";
 		} else {
 			constructString = "";
 		}
@@ -129,13 +127,6 @@ public class ClassConstructor {
 		saveLocation = l + "/";
 	}
 
-/*	public void tempSet() {
-		packageString = "";
-		importString = "";
-		extendString = "";
-		implemString = "";
-	}*/
-
 	private void resetFields() {
 		className = "";
 		packageString = "";
@@ -145,7 +136,6 @@ public class ClassConstructor {
 		accessString = "";
 		constructString = "";
 		saveLocation = "";
-		implementList.clear();
 		mainBool = false;
 		privateBool = false;
 		constructBool = false;
@@ -159,34 +149,20 @@ public class ClassConstructor {
 			System.out.println("File already Exists.");
 			exists = true;
 		} else {
-			System.out.println("File DOes NOT EXIST.");
+			System.out.println("Creating File.");
 		}
-
 		return exists;
 	}
 
-	public void createFile() {
-		if (mainBool) {
-			try {
-				PrintWriter outputFile = new PrintWriter(saveLocation + className + EXT);
-				outputFile.print(packageString);
-				outputFile.print(importString);
-				outputFile.print(accessString + " class " + className + extendString + implemString + " {\n\t" + constructString);
-				outputFile.print("\n\tpublic static void main(String[] args) {\n\t\t\n\t}\n}");
-				outputFile.close();
-			} catch (IOException ex) {ex.printStackTrace();}
-			System.out.println("main class made");
-		} else {
-			try {
-				PrintWriter outputFile = new PrintWriter(saveLocation + className + EXT);
-				outputFile.print(packageString);
-				outputFile.print(importString);	
-				outputFile.print(accessString + " class " + className + extendString + implemString + " {\n\t" + constructString + "\n}");
-				outputFile.close();
-			} catch (IOException ex) {ex.printStackTrace();}
-			System.out.println("not a main class");
+	public void createFile(String fileString) {
+		try {
+			PrintWriter outputFile = new PrintWriter(saveLocation + className + EXT);
+			outputFile.print(fileString);
+			outputFile.close();
+		} catch (IOException ex) {
+			ex.printStackTrace();
 		}
-		resetFields();
+		//resetFields();
 	}
 
 	public String generateTempFile() {
@@ -202,7 +178,6 @@ public class ClassConstructor {
 			tempStr += accessString + " class " + className + extendString + implemString + " {\n\t" + constructString + "\n}";
 		}
 		importString = "";
-		implementList = null;
 		return tempStr;
 	}
 }

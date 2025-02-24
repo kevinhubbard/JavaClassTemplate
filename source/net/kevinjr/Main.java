@@ -1,15 +1,15 @@
-package net.kevinjr;
-
-import java.awt.*;
-import javax.swing.*;
-
 /**
 * This program takes user input and creates the framework of a java file.
 * 
 * @author Kevin H
-* @version 1.0.1
-* @since 2022-01-16
+* @version 1.0.2
+* @since 2022-02-22
 */
+
+package net.kevinjr;
+
+import java.awt.*;
+import javax.swing.*;
 
 public class Main extends JFrame {
 	/**

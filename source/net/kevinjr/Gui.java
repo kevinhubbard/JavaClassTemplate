@@ -1,17 +1,17 @@
+/**
+* This class takes all the subpanel objects and adds them to the main panel. 
+* 
+* @author Kevin H
+* @version 1.0.2
+* @since 2022-02-22
+*/
+
 package net.kevinjr;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.io.*;
-
-/**
-* This class takes all the subpanel objects and adds them to the main panel. 
-* 
-* @author Kevin H
-* @version 1.0.1
-* @since 2022-01-16
-*/
 
 public class Gui extends JPanel {
 
@@ -23,15 +23,10 @@ public class Gui extends JPanel {
 	private OptionPanel optionPanel = new OptionPanel();
 	private JPanel actionPanel = new JPanel();
 	private ClassConstructor cc = new ClassConstructor();
-
 	private TextUI tpan = new TextUI();
-	//private JTextField inp = new JTextField(10);
-
 	private JButton savebtn = new JButton("Save");
 	private JButton clearbtn = new JButton("Clear");
-
 	private JButton generatePreviewBtn = new JButton("Generate");
-
 
 	/**
 	* No arg constructor that adds all panels together.
@@ -39,9 +34,8 @@ public class Gui extends JPanel {
 	public Gui() {
 		
 		actionPanel.setPreferredSize(new Dimension(250, 40));
-		//actionPanel.add(clearbtn);
+		actionPanel.add(clearbtn);
 		actionPanel.add(savebtn);
-
 		actionPanel.add(generatePreviewBtn);
 
 		savebtn.addActionListener(new SaveListener());
@@ -54,8 +48,6 @@ public class Gui extends JPanel {
 		add(extendPanel);
 		add(implementPanel);
 		add(optionPanel);
-		//add(tpan);
-		//add(inp);
 		add(actionPanel);
 		setBackground(Color.GRAY);
 	}
@@ -85,64 +77,38 @@ public class Gui extends JPanel {
 	*/
 	private class SaveListener implements ActionListener {
 		private void save() {
-			//cc.setupBools(optionPanel.returnMain(), optionPanel.returnPriv(), optionPanel.returnCons(), optionPanel.returnDir());
-			//cc.createFile();
-			//GET TXT FROM TEXT PANEL AND SAVE
+			cc.createFile(tpan.getTextContent());
 		}
 
 		public void actionPerformed(ActionEvent e) {
+			// CHOOSE DIRECTORY LOCATION UPON SUCCESSFUL VALIDATION
+			JFileChooser file = new JFileChooser();
+			file.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+			file.setCurrentDirectory(new File(System.getProperty("user.home")));
+			int returnVal = file.showSaveDialog(null);
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				File saveLoc = file.getSelectedFile();
+				String locationString = saveLoc.getAbsolutePath();
+				cc.setSaveLocation(locationString);
 
-			if (packPanel.isSelected() == true) {
-				cc.validatePackage(packPanel.getPackageName());
-			}
-
-			if (importPanel.isSelected() == true) {
-				cc.setImportString(importPanel.getImportList());
-			}
- 
-			if (extendPanel.isSelected() == true) {
-				cc.validateExtend(extendPanel.getExtendName());
-			}
-
-			if (implementPanel.isSelected() == true) {
-				cc.setImplementString(implementPanel.getImplementList());
-			}
-
-			// VALIDATE CLASS NAME INPUT
-			if (cc.validateName(classPanel.getClassName()) == false) {
-				JOptionPane.showMessageDialog(null, "Invalid Class Name");
-				classPanel.clearFields();
-				classPanel.focus();
-			} else {
-				// CHOOSE DIRECTORY LOCATION UPON SUCCESSFUL VALIDATION
-				JFileChooser file = new JFileChooser();
-				file.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-				file.setCurrentDirectory(new File(System.getProperty("user.home")));
-				int returnVal = file.showSaveDialog(null);
-				if (returnVal == JFileChooser.APPROVE_OPTION) {
-					File saveLoc = file.getSelectedFile();
-					String locationString = saveLoc.getAbsolutePath();
-					cc.setSaveLocation(locationString);
-
-					if (!cc.fileExists()) {
+				if (!cc.fileExists()) {
+					save();
+				} else {
+					int overwriteOption = JOptionPane.showConfirmDialog(null, "File already exists.\nOverwrite?", "Overwrite", JOptionPane.YES_NO_OPTION);
+					if (overwriteOption == 0) {
 						save();
 					} else {
-						int overwriteOption = JOptionPane.showConfirmDialog(null, "File already exists.\nOverwrite?", "Overwrite", JOptionPane.YES_NO_OPTION);
-						if (overwriteOption == 0) {
-							save();
-						} else {
-							JOptionPane.showMessageDialog(null, "Save aborted.");
-						}
+						JOptionPane.showMessageDialog(null, "Save aborted.");
 					}
-
-					// CLEAR USER INPUT
-					classPanel.clearFields();
-					packPanel.clearFields();
-					importPanel.clearFields();
-					extendPanel.clearFields();
-					implementPanel.clearFields();
-					optionPanel.clearFields();
 				}
+
+				// CLEAR USER INPUT
+				classPanel.clearFields();
+				packPanel.clearFields();
+				importPanel.clearFields();
+				extendPanel.clearFields();
+				implementPanel.clearFields();
+				optionPanel.clearFields();
 			}
 		}
 	}

@@ -1,3 +1,11 @@
+/**
+* This class takes all the subpanel objects and adds them to the main panel. 
+* 
+* @author Kevin H
+* @version 1.0.2
+* @since 2022-02-22
+*/
+
 package net.kevinjr;
 
 import java.awt.*;
@@ -6,25 +14,28 @@ import javax.swing.*;
 import java.io.*;
 
 public class TextUI extends JPanel {
-	//private TextPanel tp = new TextPanel();
 
 	private String text;
+	private JTextArea tex = new JTextArea(23,50);
 
 	public TextUI() {
-		JTextArea tex = new JTextArea(50, 30);
-		tex.setText(text);
-			setPreferredSize(new Dimension(500, 400));
-			add(tex);
+		setPreferredSize(new Dimension(700, 400));
+		JScrollPane scroll = new JScrollPane(tex, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		add(scroll);
 	}
 
 	public TextUI(String s) {
-		JTextArea tex = new JTextArea(50, 30);
 		tex.setText(s);
-			setPreferredSize(new Dimension(500, 400));
-			add(tex);
+		setPreferredSize(new Dimension(700, 400));
+		JScrollPane scroll = new JScrollPane(tex, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		add(scroll);
 	}
 
 	public void setContent(String t) {
 		this.text = t;
+	}
+
+	public String getTextContent() {
+		return tex.getText();
 	}
 }
